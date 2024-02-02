@@ -1,0 +1,7 @@
+flask==2.3.2
+flask_restx==1.1.0
+Werkzeug==2.3.7
+Jinja2==3.1.2
+Requests==2.31.0
+dicttoxml==1.7.16
+chardet==5.2.0
