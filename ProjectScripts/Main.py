@@ -41,7 +41,7 @@ if __name__ == '__main__':
     application.debug = True
     application.run(host="127.0.0.1", port=5000)
 
-# Test Ensemble Transcript API
+# Test Ensemble Transcript API - Georgia
 BASE_URL = 'http://127.0.0.1:5000'
 ensemble_transcript = 'ENST00000269305'
 ensemble_transcript_endpoint = f'{BASE_URL}/ensemble-transcript/{ensemble_transcript}'
@@ -53,7 +53,7 @@ if ensemble_transcript_response.status_code == 200:
 else:
     print("Ensemble Transcript API Request failed with status code:", ensemble_transcript_response.status_code)
 
-# Test RefSeqTranscript API
+# Test RefSeqTranscript API - Georgia and Christoph
 genome_build = 'GRCh38'
 variant_description = 'NM_001123.3:c.345G>T'
 select_transcripts = 'NM_001123.3'
@@ -66,7 +66,7 @@ if refseq_transcript_response.status_code == 200:
 else:
     print("RefSeqTranscript API Request failed with status code:", refseq_transcript_response.status_code)
 
-#Module 3 Variant Variant Validator
+#Merged Module 3 Variant Variant Validator into Main.py - Christoph and Georgia
 import requests
 import json
 
