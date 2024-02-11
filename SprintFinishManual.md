@@ -1,7 +1,6 @@
 #This file explains how to configure, install and run the SprintFinish code
 
 
-
 #The accepted format for variants include:
 
 NM_000088.3:c.589G>T
