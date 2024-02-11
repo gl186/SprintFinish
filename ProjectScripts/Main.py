@@ -24,7 +24,7 @@ class NameClass(Resource):
             "genome": ensembleTranscript
         }
 
-# Define the namespace for RefSeqTranscript
+# Define the namespace for RefSeqTranscript - Georgia and Christoph
 rst_space = api.namespace('RefSeqTranscript', description='Return a genomic HGVS transcript and genome coordinate')
 
 @rst_space.route("/variantvalidator/<string:genome_build>/<string:variant_description>/<string:select_transcripts>")
@@ -53,7 +53,7 @@ if ensemble_transcript_response.status_code == 200:
 else:
     print("Ensemble Transcript API Request failed with status code:", ensemble_transcript_response.status_code)
 
-# Test RefSeqTranscript API - Georgia and Christoph
+# Test RefSeqTranscript API - Georgia
 genome_build = 'GRCh38'
 variant_description = 'NM_001123.3:c.345G>T'
 select_transcripts = 'NM_001123.3'
