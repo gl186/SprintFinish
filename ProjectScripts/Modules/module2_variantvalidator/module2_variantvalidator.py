@@ -1,7 +1,7 @@
 
 """
-Simple rest interface for SprintFinish built using Flask Flask-RESTX and Swagger UI
 """
+
 # Import modules
 from flask import Flask, make_response
 from flask_restx import Api, Resource
@@ -24,7 +24,7 @@ class RefSeqTranscriptClass(Resource):
     def get(self, genome_build, variant_description, select_transcripts):
 
         #Make a request to the current variantvalidator rest-api
-        url ='/'.join([https://rest.variantvalidator.org/variantvalidator,genome_build, variant_description, select_trasncripts])
+        url ='/'.join(["https://rest.variantvalidator.org/variantvalidator,genome_build, variant_description, select_trasncripts"])
         validation = request.get(url)
         content =validation.json()
         return content
