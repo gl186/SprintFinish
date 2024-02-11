@@ -36,7 +36,7 @@ if __name__ == '__main__':
 	application.debug = True # Enable debugging mode
 	application.run(host="127.0.0.1", port=5000) # Specify a host and port fot the app
 
-#Testing the rest interface defined above utilising the requests library. This will make HTTP requests to our API engpoints.
+#Testing the rest interface defined above utilising the requests library. This will make HTTP requests to our API engpoints. Georgia
 import requests
 
 #need flask to be running but already running from lines 6-7 of this script
