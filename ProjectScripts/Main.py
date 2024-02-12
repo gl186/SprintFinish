@@ -69,7 +69,6 @@ else:
 
 #Merged Module 3 Variant Variant Validator into Main.py - Christoph and Georgia
 # Import modules
-
 from flask import Flask, make_response
 from flask_restx import Api, Resource, fields, reqparse
 import requests
