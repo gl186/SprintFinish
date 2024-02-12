@@ -1,6 +1,6 @@
 # A simple script that requests mane_select data from the VariantValidator REST API LOVD GET function
 #Necessary modules: requests to use the function and json later to work on output in json
-import requests, json
+import requests,json
 
 
 base_url = "https://rest.variantvalidator.org/LOVD/lovd/" #Part of the url that never changes plus LOVD endpoint
@@ -9,6 +9,7 @@ hgvs_genomic_description = "NC_000017.10%3Ag.48275363C%3EA" #ToDo: Avoid problem
 
 #url from API: https://rest.variantvalidator.org/LOVD/lovd/hg19/NC_000017.10%3Ag.48275363C%3EA/all/mane_select/False/True?content-type=application%2Fjson
 ext_get_transcripts = genome_build + "/" + hgvs_genomic_description + "/" + "all/mane_select/False/True"
+
 
 #the complete request function:
 def make_request(base_url, ext_get_transcripts):
@@ -24,6 +25,5 @@ def make_request(base_url, ext_get_transcripts):
 
 response = make_request(base_url, ext_get_transcripts)
 print(response.status_code)
-print(response.json())
-
+print(response.json)
 #Todo: Filter values from response.json()
