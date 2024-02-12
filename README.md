@@ -1,8 +1,21 @@
 # SprintFinish
 Sprint 2 and final assessment project for Group 1 (Module 3 PGCert Clinical Bioniformatics Intro to Programming)
+This pyhthon API integration will accept GEL variant descrtiptions (ie. c. 4375C>T) and provide valid and accurate genome, transcript and protein variant descriptions.
+This product will gather the information from Variant Validator REST aPI and return the data as a Pyhton dictionary. 
 
+Input: Ensembl transcript description with or wihtout version number
+#The accepted format for variants include:
 
-Example README.md content from rest_variantValidator directory:
+NM_000088.3:c.589G>T
+NC_000017.10:g.48275363C>A
+NG_007400.1:g.8638G>T
+LRG_1:g.8638G>T
+LRG_1t1:c.589G>T
+17-50198002-C-A  # Note this variant is in the context of GRCh38
+chr17:50198002C>A  # Note this variant is in the context of GRCh38
+
+The output received by the client is: Genomic, transcript and protein descriptions with genome annotations. 
+This product utilises the Variant Validator REST API.
 
 # About rest_variantValidator
 
@@ -61,7 +74,7 @@ Please see [MANUAL.md](./docs/MANUAL.md)
 
 Please see [LICENSE.txt](LICENSE.txt)
 
-## Cite us
+## Cite Variant Validator
 
 Hum Mutat. 2017 Oct 1. doi: 10.1002/humu.23348
 
@@ -84,4 +97,3 @@ Freeman PJ, Hart RK, Gretton LJ, Brookes AJ, Dalgleish R.
 > You should have received a copy of the GNU Affero General Public License
 > along with this program.  If not, see <https://www.gnu.org/licenses/>.
 > </LICENSE>
-

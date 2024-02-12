@@ -1,6 +1,7 @@
 """
 Simple rest interface for SprintFinish built using Flask Flask-RESTX and Swagger UI
 """
+
 # Import modules
 from flask import Flask, make_response
 import requests
@@ -61,3 +62,23 @@ class NameClass(Resource):
 if __name__ == '__main__':
     application.debug = True  # Enable debugging mode
     application.run(host="127.0.0.1", port=5000)  # Specify a host and port fot the app
+
+#Testing the rest interface defined above utilising the requests library. This will make HTTP requests to our API engpoints. Georgia
+
+#need flask to be running but already running from lines 6-7 of this script
+
+# Define base URL of the API
+BASE_URL = 'http://127.0.0.1:5000'
+
+# Provide example ensembl transcript to test. This can be changed to test different transcripts
+ensemble_transcript = 'ENST00000269305'
+
+# Define the endpoint URL
+endpoint_url = f'{BASE_URL}/ensemble-transcript/{ensemble_transcript}'
+
+# Send GET request to the endpoint
+response = requests.get(endpoint_url)
+
+# Print the response status code and content
+print('Response Status Code:', response.status_code)
+print('Response Content:', response.json())
