@@ -1,22 +1,14 @@
-# Written by Nurhayu
-***
+## API using the VariantValidator LOVD Endpoint to retrieve MANE Select and MANE Select Plus Clinical Data
 
-# About rest_VV_EnsemblVEP 
-***
+# INPUT:
 
-rest_VV_EnsemblVEP is a rest web interface for VariantValidator to EnsembleVEP annotation
+Required input to be filled in to fields of the API is selection of genome build and a genomic variant in HGVS format.
+To retrieve the required mane_select transcript data for refseq and ensembl transcript models, additionally configure select_transcripts to mane_select.
 
-# Features
+# Definition of mane_select in the VariantValidator LOVD Endpoint
 
-VV_EnsemblVEP fetches input from transcript and protein from VariantValidator in HGVS format and generate annotations from 
-for Variant Effect Predictor (from EnsemblVEP)
+mane_select transcript data includes MANE Select and MANE Plus Clinical Data in the VariantValidator LOVD endpoint.
 
-See https://github.com/openvar/variantValidator and https://github.com/Ensembl/ensembl-vep for more details.
+# OUTPUT:
 
-# Pre-requisites
-VV_EnsembleVEP will work on Linux operating systems.
-    . Python 3.12.1
-
-# License
-
-Please see LICENSE.txt
+The current output can be downloaded in json format from the reponse body window.

@@ -15,25 +15,24 @@ api = Api(app, title="LOVD Variant API", description="Retrieve variant data from
 
 # Request parser to identify specific content-type requests
 parser = reqparse.RequestParser()
-parser.add_argument('content-type', type=str, help='Accepted\n-application/json')
+parser.add_argument('content-type', type=str, help='Accepted\napplication/json')
 
 # Define a namespace for variant data
 va_space = api.namespace('LOVD', description='LOVD API Endpoints')
 
 
 @va_space.route(
-    "/lovd/<string:genome_build>/<string:variant_description>/<string:select_transcripts>/<string:checkonly>")
+    "/lovd/<string:genome_build>/<string:variant_description>/<string:select_transcripts>")
 class VariantAnnotations(Resource):
 
-    # Add documentation about the parser
     @api.doc(params={"genome_build": "GRCh38, GRCh37, hg38, hg19",
                      "variant_description": "HGVS format e.g NC_000017.10:g.48275363C>A",
-                     "select_transcripts": "mane_select",
-                     "checkonly": "True"}, parser=parser)
-    # Retrieves variant data from the Leiden Open Variation Database (LOVD) using the VariantValidator API.
-    def get(self, genome_build, variant_description, select_transcripts, checkonly):
+                     "select_transcripts": "mane_select"}, parser=parser)
+
+    def get(self, genome_build, variant_description, select_transcripts):
+        """Retrieve varant data from the Leiden Open Variation Database (LOVD) using the VariantValidator API"""
         base_url = "https://rest.variantvalidator.org/LOVD/lovd/"
-        ext_get_transcripts = f"{genome_build}/{variant_description}/all/{'mane_select' if select_transcripts else 'raw'}/True/True{checkonly}"
+        ext_get_transcripts = f"{genome_build}/{variant_description}/all/{'mane_select' if select_transcripts else 'raw'}/False/False"
 
         try:
             url = base_url + ext_get_transcripts
