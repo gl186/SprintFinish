@@ -7,8 +7,17 @@
 from flask import Flask
 from flask_restx import Api, Resource
 import requests
+import logging
+import logging.handlers as handlers
 
-# Define the Flask application
+# Logging configuration
+logger = logging.getLogger('rest_api')
+logger.setLevel(logging.INFO)
+logHandler = handlers.RotatingFileHandler('rest_api.log', maxBytes=500000, backupCount=2)
+logHandler.setLevel(logging.ERROR)
+logger.addHandler(logHandler)
+
+# Define the Flask application and API
 application = Flask(__name__)
 api = Api(application)
 
@@ -78,6 +87,7 @@ class VariantAnnotations(Resource):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 #Added VEP Module 4 support - Christoph
