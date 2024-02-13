@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SprintFinish.iml" filepath="$PROJECT_DIR$/.idea/SprintFinish.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProjectScripts/Modules/module3_VV_LOVD/.idea/module3_VV_LOVD.iml" filepath="$PROJECT_DIR$/ProjectScripts/Modules/module3_VV_LOVD/.idea/module3_VV_LOVD.iml" />
     </modules>
   </component>
 </project>
