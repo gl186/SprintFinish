@@ -4,8 +4,8 @@ SprintFinish is a Flask-based RESTful API for retrieving genomic data, including
 
 This README provides an overview of the SprintFinish RESTful API, installation instructions, usage guidelines, testing procedures, contribution guidelines, and license information
 
-This pyhthon API integration will accept GEL variant descrtiptions (ie. c. 4375C>T) and provide valid and accurate genome, transcript and protein variant descriptions.
-This product will gather the information from Variant Validator REST aPI and return the data as a Pyhton dictionary.
+This pyhthon API integration will accept GEL variant descriptions (ie. c. 4375C>T) and provide valid and accurate genome, transcript and protein variant descriptions.
+This product will gather the information from Variant Validator REST aPI and return the data as a Python dictionary.
 
 # About rest_variantValidator
 
