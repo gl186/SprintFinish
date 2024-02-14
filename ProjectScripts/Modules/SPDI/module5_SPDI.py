@@ -12,23 +12,25 @@ api = Api(app, title="Converting HGVS into SPDI", description="Retrieve variant 
 
 # Request parser to identify specific content-type requests
 parser = reqparse.RequestParser()
-parser.add_argument('content-type', type=str, help='Accepted\napplication/json')
+#parser.add_argument('content-type', type=str, help='Accepted\napplication/json')
 
 # Define a namespace for variant data
 va_space = api.namespace('SPDI', description='SPDI API Endpoints')
 
 
 @va_space.route(
-    "/hgvs/<string:hgvs>/<string:contextuals>")
+    "/hgvs/<string:hgvs>")
+#"/hgvs/<string:hgvs>/<string:contextuals>") removed contextuals as essential required input
 class VariantAnnotations(Resource):
 
     @api.doc(params={"hgvs": "HGVS format e.g NC_000017.10:g.48275363C>A",
                      "contextuals": "assembly"}, parser=parser)
 
+
     def get(self, hgvs, contextuals):
         """Retrieve varant data from the Leiden Open Variation Database (LOVD) using the VariantValidator API"""
         base_url = "https://api.ncbi.nlm.nih.gov/variation/v0/hgvs"
-        #base_url = "https://api.ncbi.nlm.nih.gov/variation/v0/hgvs/NC_000001.10%3Ag.12345T%3EA/contextuals"
+        #base_url = "https://api.ncbi.nlm.nih.gov/variation/v0/hgvs/NC_000001.10%3Ag.12345T%3EA/contextuals" from NLM website
         ext_get_transcripts = f"/{hgvs}/{'assembly' if assembly else 'raw'}"
 
         try:
