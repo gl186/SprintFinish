@@ -1,60 +1,55 @@
 """
-Simple rest interface for Variant Validator with Ensemble endpoints using Flask Flask-RestX and Swagger UI
+A simple REST interface for retrieving variant annotations from the GRCh37 Ensembl VEP REST API for an HGVS variant.
+This interface is implemented using Flask, Flask-RestX, and Swagger UI.
 """
 
-# Import modules
+#Import modules
 from flask import Flask
-from flask_restx import Api, Resource, reqparse
+from flask_restx import Api, Resource, Namespace
 import requests
 
-# Define the application as a Flask app with the name defined by __name__
+# Define the app as a Flask app with the name defined by __name__
 app = Flask(__name__)
 
 # Define the Api as api
-api = Api(app, version='1.0', title='Variant Validator_VEP API',
-          description='Retrieve variant data and Ensembl VEP annotations')
+api = Api(app, title="Variant Effect Predictor API", description="Retrieve VEP annotations from the GRCh37 Ensembl REST API")
 
-# Request parser to identify specific content-type requests
-parser = reqparse.RequestParser()
-parser.add_argument('content-type', type=str, help='Accepted\n-application/json')
+# Create a namespace
+VEP_ns = Namespace("VEP", description="Variant Effect Predictor operations")
 
-# Define a namespace for VEP variant data
-vep_space = api.namespace('VEP', description='VEP API Endpoints')
+# Ensembl VEP API endpoint
+vep_url = "https://grch37.rest.ensembl.org/vep/human/hgvs/NM_000138.4:c.356G>A"
 
+@VEP_ns.route("/<string:variant_description>")
+class VEP(Resource):
+    @VEP_ns.doc(params={"variant_description": "HGVS format e.g NM_000138.4:c.356G>A", "assembly":"GRCh37"})
+    def get(self, variant_description):
+        variant_query = {
+            "variant": variant_description,
+            "content-type": "application/json",
+            "canonical": "yes",
+            "assembly": "GRCh37",
+        }
 
-@vep_space.route("/VEP/<string:genome_build>/<string:variant_description>/<string:select_transcripts>")
-class VariantVEPResource(Resource):
-
-    # Add documentation about the parser
-
-    @api.doc(params={"genome_build": "GRCh38, GRCh37, hg38, hg19",
-                     "variant_description": "HGVS format NM_001005484.2:c.274G>A", "select_transcripts": "mane_select"
-                     }, parser=parser)
-    def get(self, genome_build, variant_description, select_transcripts):
-        base_url = "http://rest.variantvalidator.org"
-        endpoint = "/VariantValidator/variantvalidator/{genome_build}/{variant_description}/{select_transcripts}"
-
-        url = f"{base_url}{endpoint}".format(
-            genome_build=genome_build,
-            variant_description=variant_description,
-            select_transcripts=select_transcripts
-        )
         try:
-            # Lets retrieve variant data from Variant Validator REST API
-            response = requests.get(url)
-            response_data = response.json()
-            return response_data, 200
+            response = requests.get(vep_url, params=variant_query)
+            response_json = response.json()
 
-            # Then we retrieve VEP data from Ensembl REST API
-            vep_url = "https://rest.ensembl.org/vep/human/hgvs/{variant_description}?content_type=application/json"
-            vep_response = requests.get(vep_url.format(variant_description=variant_description))
-            vep_data = vep_response.json()
-            return vep_data, 200
+            # Return the entire JSON response
+            return response_json,200
 
         except requests.RequestException as e:
-            print(f"Error fetching variant data: {e}")
+            return {"error": f"Error fetching VEP data: {e}"}
 
+# Add the namespace to the API
+api.add_namespace(VEP_ns)
 
+# Example usage
 if __name__ == "__main__":
+    variant_to_query = "NM_000138.4:c.356G>A"
+    print("Fetching VEP data for variant:", variant_to_query)
+    vep_response = VEP().get(variant_to_query)
+
+# Run the Flask app
     app.run(debug=True)
-    app.run(host="127.0.0.1", port=5000)  # Specify a host and port fot the app
+
