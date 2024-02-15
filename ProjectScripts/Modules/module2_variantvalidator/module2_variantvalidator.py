@@ -33,4 +33,3 @@ class RefSeqTranscriptClass(Resource):
 # allows app to be run in debug mode
 if __name__ == '__main__':
     application.debug = True #enable debugging mode
-    application.run(host="127.0.0.1", port=5000) # specify a host and port for the app
