@@ -1,22 +1,36 @@
-# Written by Nurhayu
+## Written by Nurhayu
 ***
+##  Variant Effect Predictor API 
 
-# About rest_VV_EnsemblVEP 
-***
+The Variant Effect Predictor (VEP) API allows you to retrieve VEP annotations from the GRCh37 Ensembl REST API. It's a useful tool for analyzing genetic variants and understanding their impact on genes. 
 
-rest_VV_EnsemblVEP is a rest web interface for VariantValidator to EnsembleVEP annotation
+### Usage 
 
-# Features
+### Requirements: 
 
-VV_EnsemblVEP fetches input from transcript and protein from VariantValidator in HGVS format and generate annotations from 
-for Variant Effect Predictor (from EnsemblVEP)
+    Make sure you have Python 3.12.1 , Flask and Flask-RestX installed. 
 
-See https://github.com/openvar/variantValidator and https://github.com/Ensembl/ensembl-vep for more details.
+### Endpoints: 
 
-# Pre-requisites
-VV_EnsembleVEP will work on Linux operating systems.
-    . Python 3.12.1
+    The API provides a single endpoint for querying VEP data based on variant descriptions in HGVS format.
 
-# License
+    Retrieves GRCh37 Ensembl VEP annotations for the specified variant. 
 
-Please see LICENSE.txt
+    
+### Parameters: 
+
+    variant_description: HGVS format (e.g., NM_000138.4:c.356G>A) 
+
+### Response: 
+
+    The API returns a JSON response containing VEP annotations for the variant. 
+
+    Error Handling: 
+
+    If there's an issue fetching VEP data, an error message will be returned. 
+
+
+
+Assuming you have the Flask app running locally, you can query the VEP data for a specific variant using the provided endpoint. 
+
+--- 
