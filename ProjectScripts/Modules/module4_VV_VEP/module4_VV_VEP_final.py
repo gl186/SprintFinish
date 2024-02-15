@@ -12,7 +12,7 @@ import requests
 app = Flask(__name__)
 
 # # Define the Api as api
-api = Api(app, title="VEP Annotations API", description="Retrieve VEP annotations for variants")
+api = Api(app, title="VEP Annotations API", description="Retrieve VEP annotations for HGVS variants")
 
 # Define a namespace
 VEP_ns = api.namespace("VEP", description="VEP Annotations")
