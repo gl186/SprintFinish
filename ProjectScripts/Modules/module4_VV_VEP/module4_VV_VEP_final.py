@@ -12,13 +12,15 @@ import requests
 app = Flask(__name__)
 
 # # Define the Api as api
-api = Api(app, title="VEP Annotations API", description="Retrieve VEP annotations for variants")
+api = Api(app, title="VEP Annotations API", description="Retrieve VEP annotations for HGVS variants")
 
 # Define a namespace
 VEP_ns = api.namespace("VEP", description="VEP Annotations")
 
-# Define the VEP Annotations Endpoints
+# The example of HGVS variant i.e. NM_000138.5:c.356G>A was extensively studied in Unit 1 - Introduction to Clinical Genomics
+# The variant interpretation report was formulated based on the variant annotations from Ensembl VEP and other relevant sources
 
+# Define the VEP Annotations Endpoints
 def get_vep_annotations(hgvs_variant, assembly="GRCh37"):
     # Define the VEP API endpoint for the specified assembly
     if assembly == "GRCh37":
@@ -54,7 +56,8 @@ def get_vep_annotations(hgvs_variant, assembly="GRCh37"):
 @VEP_ns.route("/annotations/<string:hgvs_variant>/<string:assembly>")
 class VEPAnnotations(Resource):
 
-    @api.doc(params={"hgvs_variant": "HGVS variant (e.g., NM_000138.5:c.356G>A)", "assembly": "Assembly (GRCh37 or GRCh38)"}) # Add decorators
+    # Add decorators
+    @api.doc(params={"hgvs_variant": "HGVS variant (e.g., NM_000138.5:c.356G>A)", "assembly": "Assembly (GRCh37 or GRCh38)"})
 
     def get(self, hgvs_variant, assembly):
 
@@ -70,7 +73,3 @@ class VEPAnnotations(Resource):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
