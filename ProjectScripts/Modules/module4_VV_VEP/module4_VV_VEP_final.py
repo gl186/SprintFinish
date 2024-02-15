@@ -17,6 +17,11 @@ api = Api(app, title="VEP Annotations API", description="Retrieve VEP annotation
 # Define a namespace
 VEP_ns = api.namespace("VEP", description="VEP Annotations")
 
+"""
+The example of HGVS variant i.e. NM_000138.5:c.356G>A was extensively studied in Unit 1 - Introduction to Clinical Genomics
+The variant interpretation report was formulated based on the variant annotations from Ensembl VEP and other relevant sources
+"""
+
 # Define the VEP Annotations Endpoints
 
 def get_vep_annotations(hgvs_variant, assembly="GRCh37"):
