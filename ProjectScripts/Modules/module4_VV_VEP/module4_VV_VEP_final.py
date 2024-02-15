@@ -74,8 +74,5 @@ class VEPAnnotations(Resource):
 if __name__ == "__main__":
     app.run(debug=True)
 
-# The example of HGVS variant i.e. NM_000138.5:c.356G>A was extensively studied in Unit 1 - Introduction to Clinical Genomics
-# The variant interpretation report was formulated based on the variant annotations from Ensembl VEP and other relevant sources
-
 
 
