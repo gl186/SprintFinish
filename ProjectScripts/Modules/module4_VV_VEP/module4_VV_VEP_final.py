@@ -54,7 +54,8 @@ def get_vep_annotations(hgvs_variant, assembly="GRCh37"):
 @VEP_ns.route("/annotations/<string:hgvs_variant>/<string:assembly>")
 class VEPAnnotations(Resource):
 
-    @api.doc(params={"hgvs_variant": "HGVS variant (e.g., NM_000138.5:c.356G>A)", "assembly": "Assembly (GRCh37 or GRCh38)"}) # Add decorators
+    # Add decorators
+    @api.doc(params={"hgvs_variant": "HGVS variant (e.g., NM_000138.5:c.356G>A)", "assembly": "Assembly (GRCh37 or GRCh38)"})
 
     def get(self, hgvs_variant, assembly):
 
