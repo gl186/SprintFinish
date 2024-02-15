@@ -1,6 +1,6 @@
 name: SprintFinish
 channels:
-- conda-forge
-- bioconda
+  - conda-forge
+  - bioconda
 dependencies:
-- python=3.12.1
+  - python=3.12.1

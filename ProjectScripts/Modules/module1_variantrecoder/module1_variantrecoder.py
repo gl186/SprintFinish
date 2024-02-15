@@ -13,7 +13,6 @@ application = Flask(__name__)
 # Define the API as api
 api = Api(app=application)
 
-
 # Define a name-space to be read Swagger UI which is built in to Flask-RESTX
 # The first variable is the path of the namespace the second variable describes the space
 
@@ -28,14 +27,13 @@ parser = reqparse.RequestParser()
 parser.add_argument('content-type',
                     type=str,
                     help='Accepted:\n- application/json')
+
+
 @api.representation('application/json')
 def json(data, code, headers):
     resp = make_response(data, code)
     resp.headers['Content-Type'] = 'application/json'
     return resp
-
-
-
 
 
 @ensembleTranscriptNameSpace.route("/<string:ensembleTranscript>")
@@ -46,6 +44,7 @@ class NameClass(Resource):
         server = "https://rest.ensembl.org"
         ext = "/variant_recoder/human/" + ensembleTranscript
 
+
         response = requests.get(server + ext, headers={"Content-Type": "application/json"})
         return json({
             "Genomic-HGVS": response.json()
@@ -55,4 +54,5 @@ class NameClass(Resource):
 # Allows app to be run in debug mode
 if __name__ == '__main__':
     application.debug = True  # Enable debugging mode
-    application.run(host="127.0.0.1", port=5000)  # Specify a host and port fot the app
+
+    
