@@ -8,14 +8,14 @@ import requests
 app = Flask(__name__)
 
 # Define the Api as api
-api = Api(app, title="Converting HGVS into SPDI", description="Retrieve variant data from SPDI via HGVS")
+api = Api(app, title="Converting HGVS into module5_SPDI", description="Retrieve variant data from module5_SPDI via HGVS")
 
 # Request parser to identify specific content-type requests
 parser = reqparse.RequestParser()
 #parser.add_argument('content-type', type=str, help='Accepted\napplication/json')
 
 # Define a namespace for variant data
-va_space = api.namespace('SPDI', description='SPDI API Endpoints')
+va_space = api.namespace('module5_SPDI', description='module5_SPDI API Endpoints')
 
 
 @va_space.route(
@@ -40,7 +40,7 @@ class VariantAnnotations(Resource):
             return response_json, 200
 
         except requests.RequestException as e:
-            return {"error": f"Error fetching SPDI variant data: {e}"}, 500
+            return {"error": f"Error fetching module5_SPDI variant data: {e}"}, 500
 
 
 if __name__ == "__main__":
