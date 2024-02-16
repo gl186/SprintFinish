@@ -1,3 +1,6 @@
+"""
+Simple rest api that input HGVS variant and retrieve data from Ensembl VEP GRCh38 and GRCh37 - Nurhayu
+"""
 import requests
 import json
 import logging
@@ -64,6 +67,10 @@ def get_variant_annotation(hgvs_variant):
     else:
         logger.info("Data retrieval successful!")
 
+
 # Example usage
 hgvs_variant = "NM_000138.5:c.356G>A"
 get_variant_annotation(hgvs_variant)
+
+# The variant NM_000138.5:c.356G>A was extensively studied in Unit 1: Introduction to Clinical Bioinformatics and Genomics
+# The variant interpretation report produced was based on Ensembl VEP annotations and other relevant sources
