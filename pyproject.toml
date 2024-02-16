@@ -1,5 +1,5 @@
 [project]
-name = "Main"
+name = "SprintFinish"
 dynamic = ["version"]
 description = ""
 
@@ -18,4 +18,8 @@ classifiers = [
 
 [tool.setuptools.packages.find]
 where = ["."] # Look for packages in the 'root' directory
-include = ["Modules"] # Match package names for 
+include = ["Modules*"] # Match package names for
+
+[build-system]
+requires = ["setuptools>=19", "setup_scm[toml]>=6.2", "wheel"]
+build-backend = "setuptools.build_meta"

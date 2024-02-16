@@ -1,5 +1,6 @@
-
 """
+A simple REST interface for retrieving variant validator information from the Variant Validator REST API for an RefSeq transcript.
+This interface is implemented using Flask, Flask-RestX, and Swagger UI.
 """
 
 # Import modules
