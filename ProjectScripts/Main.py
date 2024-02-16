@@ -25,9 +25,11 @@ from Modules import module4_VV_VEP
 module4_VV_VEP.__name__
 
 #import module 5 SPDI
-from Modules import module5_SPDI
-module5_SPDI.__name__
-
+import module5_SPDI
+if __name__ == "__main__":
+    hgvs_input = input("Enter HGVS format (e.g., NC_000017.10:g.48275363C>A): ")
+    variant_data = variant_data_module.get_variant_data(hgvs_input)
+    print(variant_data)
 
 
 
