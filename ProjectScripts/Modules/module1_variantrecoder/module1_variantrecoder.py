@@ -1,6 +1,7 @@
 """
 Simple rest interface for SprintFinish built using Flask Flask-RESTX and Swagger UI
 """
+
 # Import modules
 from flask import Flask, make_response
 import requests
@@ -36,6 +37,9 @@ def json(data, code, headers):
     return resp
 
 
+
+
+
 @ensembleTranscriptNameSpace.route("/<string:ensembleTranscript>")
 class NameClass(Resource):
     @api.doc(parser=parser)
@@ -44,15 +48,18 @@ class NameClass(Resource):
         server = "https://rest.ensembl.org"
         ext = "/variant_recoder/human/" + ensembleTranscript
 
-
         response = requests.get(server + ext, headers={"Content-Type": "application/json"})
         return json({
             "Genomic-HGVS": response.json()
         }, 200, None)
 
+
+
+
+
 # The second variable:
 # Allows app to be run in debug mode
 if __name__ == '__main__':
     application.debug = True  # Enable debugging mode
+    application.run(host="127.0.0.1", port=5000)  # Specify a host and port fot the app
 
-    
