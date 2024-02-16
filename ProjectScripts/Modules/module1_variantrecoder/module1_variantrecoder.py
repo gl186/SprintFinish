@@ -37,9 +37,6 @@ def json(data, code, headers):
     return resp
 
 
-
-
-
 @ensembleTranscriptNameSpace.route("/<string:ensembleTranscript>")
 class NameClass(Resource):
     @api.doc(parser=parser)
@@ -52,14 +49,10 @@ class NameClass(Resource):
         return json({
             "Genomic-HGVS": response.json()
         }, 200, None)
-
-
-
-
+    print("Module 1 working during main.py test")
 
 # The second variable:
 # Allows app to be run in debug mode
 if __name__ == '__main__':
     application.debug = True  # Enable debugging mode
     application.run(host="127.0.0.1", port=5000)  # Specify a host and port fot the app
-

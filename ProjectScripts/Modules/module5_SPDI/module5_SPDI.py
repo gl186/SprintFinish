@@ -17,9 +17,6 @@ parser = reqparse.RequestParser()
 # Define a namespace for variant data
 va_space = api.namespace('module5_SPDI', description='module5_SPDI API Endpoints')
 
-#print hello from georgia code if called correctly by main.py remove this if stops running when tested
-def debug_import():
-    print("Hello from Georgia code")
 
 @va_space.route(
     "/hgvs/<string:hgvs>")
