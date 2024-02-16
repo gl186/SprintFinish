@@ -1,0 +1,21 @@
+[project]
+name = "Main"
+dynamic = ["version"]
+description = ""
+
+requires-python = ">=3.12"
+dependencies = []
+
+classifiers = [
+    "Development Status :: 5-Production/Stable",
+    "Intended Audience :: Users",
+    "Topic :: Software Developement",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+""
+
+[tool.setuptools.packages.find]
+where = ["."] # Look for packages in the 'root' directory
+include = ["Modules"] # Match package names for 
