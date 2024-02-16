@@ -1,11 +1,23 @@
-
-"""
-"""
-
 # Import modules
 from flask import Flask, make_response
 from flask_restx import Api, Resource
 import requests
+import logging
+
+LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
+logging.basicConfig(filename = "E:\\python\\module2.log",
+                    level = logging.DEBUG,
+                    format = LOG_FORMAT)
+logger = logging.getLogger()
+
+#Testing logger messages
+logger.info("This is an info message")
+logging.debug("This is a debug message")
+logging.warning("This is a warning message")
+logging.error("This is an error message")
+logging.critical("This is a critical message")
+
+print(logger.level)
 
 # Define the application as a Flask app with the name defined by __name__ (i.e. the name of the current module)
 application = Flask(__name__)
