@@ -34,21 +34,21 @@ if __name__ == "__main__":
 
 
 #peters code examples from tutorial 16/2/24 start here:
-import vep, vv, vr
+#import vep, vv, vr
 
-if ensembletranscript in input:
-    hgvs_genomic = vr(hgvs_transcript, genome_build)
-if "NM_" input:
-    hgvs_genomic = vv(hgvs_transcript, genome_build)
+#if ensembletranscript in input:
+ #   hgvs_genomic = vr(hgvs_transcript, genome_build)
+#if "NM_" input:
+  #  hgvs_genomic = vv(hgvs_transcript, genome_build)
 
 #annotation
-if genmome_build = "GRCh38"
-    vep38(variables)
+#if genmome_build = "GRCh38"
+ #   vep38(variables)
 
-def vep38():
-    print ("hello from a function")
+#def vep38():
+ #   print ("hello from a function")
 
-def vep37 ():
-    print ("hello from a function 2")
+#def vep37 ():
+ #   print ("hello from a function 2")
 
 
