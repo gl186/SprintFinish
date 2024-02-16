@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SprintFinish.iml" filepath="$PROJECT_DIR$/.idea/SprintFinish.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../rest_variantValidator/.idea/rest_variantValidator.iml" filepath="$PROJECT_DIR$/../rest_variantValidator/.idea/rest_variantValidator.iml" />
     </modules>
   </component>
 </project>
