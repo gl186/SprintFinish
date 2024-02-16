@@ -12,25 +12,26 @@ import requests
 application = Flask(__name__)
 
 # Define the API as api
-api = Api(app = application)
+api = Api(app=application)
 
-# Define a name-space to be read Swagger UI which is built in to Flask-RESTX
-# The first variable is the path of the namespace the second variable describes the space
+# Define a name-space to be read Swagger UI which is built into Flask-RESTX
+# The first variable is the path of the namespace, and the second variable describes the space
 
 # Note: 'rst' stands for RefSeqTranscript
-rst_space = api.namespace('RefSeqTranscript', description = 'Return a genomic HGVS transcript and genome coordinate')
+rst_space = api.namespace('RefSeqTranscript', description='Return a genomic HGVS transcript and genome coordinate')
 
 @rst_space.route("/variantvalidator/<string:genome_build>/<string:variant_description>/<string:select_transcripts>")
 class RefSeqTranscriptClass(Resource):
     def get(self, genome_build, variant_description, select_transcripts):
 
-        #Make a request to the current variantvalidator rest-api
-        url ='/'.join(["https://rest.variantvalidator.org/variantvalidator,genome_build, variant_description, select_trasncripts"])
-        validation = request.get(url)
-        content =validation.json()
+        # Make a request to the current variantvalidator rest-api
+        url = '/'.join(["https://rest.variantvalidator.org/variantvalidator", genome_build, variant_description, select_transcripts])
+        validation = requests.get(url)
+        content = validation.json()
         return content
 
-
-# allows app to be run in debug mode
+# Allows the app to be run in debug mode
 if __name__ == '__main__':
-    application.debug = True #enable debugging mode
+    application.debug = True  # enable debugging mode
+    application.run()
+
