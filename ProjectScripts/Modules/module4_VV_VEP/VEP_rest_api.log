@@ -1,12 +1,8 @@
-INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:5000
-INFO:werkzeug:[33mPress CTRL+C to quit[0m
-INFO:werkzeug: * Restarting with stat
-WARNING:werkzeug: * Debugger is active!
-INFO:werkzeug: * Debugger PIN: 342-974-940
-INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:5000
-INFO:werkzeug:[33mPress CTRL+C to quit[0m
-INFO:werkzeug: * Restarting with stat
-WARNING:werkzeug: * Debugger is active!
-INFO:werkzeug: * Debugger PIN: 342-974-940
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): grch37.rest.ensembl.org:443
+DEBUG:urllib3.connectionpool:https://grch37.rest.ensembl.org:443 "GET /vep/human/hgvs/NM_000138.5:c.356G%3EA HTTP/1.1" 200 1603
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rest.ensembl.org:443
+DEBUG:urllib3.connectionpool:https://rest.ensembl.org:443 "GET /vep/human/hgvs/NM_000138.5:c.356G%3EA HTTP/1.1" 200 2636
+INFO:VEP_rest_api:Annotation data for GRCh37:
+INFO:VEP_rest_api:
+Annotation data for GRCh38:
+INFO:VEP_rest_api:Data retrieval successful!
