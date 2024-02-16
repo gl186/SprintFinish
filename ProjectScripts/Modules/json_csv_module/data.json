@@ -1,0 +1,110 @@
+{
+  "NM_001005484.2:c.274G>A": {
+    "alt_genomic_loci": [],
+    "annotations": {
+      "chromosome": "1",
+      "db_xref": {
+        "CCDS": "CCDS30547.2",
+        "ensemblgene": null,
+        "hgnc": "HGNC:14825",
+        "ncbigene": "79501",
+        "select": "MANE"
+      },
+      "ensembl_select": false,
+      "mane_plus_clinical": false,
+      "mane_select": true,
+      "map": "1p36.33",
+      "note": "olfactory receptor family 4 subfamily F member 5",
+      "refseq_select": true,
+      "variant": "0"
+    },
+    "gene_ids": {
+      "ccds_ids": [
+        "CCDS30547"
+      ],
+      "ensembl_gene_id": "ENSG00000186092",
+      "entrez_gene_id": "79501",
+      "hgnc_id": "HGNC:14825",
+      "omim_id": [],
+      "ucsc_id": "uc001aal.1"
+    },
+    "gene_symbol": "OR4F5",
+    "genome_context_intronic_sequence": "",
+    "hgvs_lrg_transcript_variant": "",
+    "hgvs_lrg_variant": "",
+    "hgvs_predicted_protein_consequence": {
+      "lrg_slr": "",
+      "lrg_tlr": "",
+      "slr": "NP_001005484.2:p.(A92T)",
+      "tlr": "NP_001005484.2:p.(Ala92Thr)"
+    },
+    "hgvs_refseqgene_variant": "",
+    "hgvs_transcript_variant": "NM_001005484.2:c.274G>A",
+    "primary_assembly_loci": {
+      "grch37": {
+        "hgvs_genomic_description": "NC_000001.10:g.69301G>A",
+        "vcf": {
+          "alt": "A",
+          "chr": "1",
+          "pos": "69301",
+          "ref": "G"
+        }
+      },
+      "grch38": {
+        "hgvs_genomic_description": "NC_000001.11:g.69301G>A",
+        "vcf": {
+          "alt": "A",
+          "chr": "1",
+          "pos": "69301",
+          "ref": "G"
+        }
+      },
+      "hg19": {
+        "hgvs_genomic_description": "NC_000001.10:g.69301G>A",
+        "vcf": {
+          "alt": "A",
+          "chr": "chr1",
+          "pos": "69301",
+          "ref": "G"
+        }
+      },
+      "hg38": {
+        "hgvs_genomic_description": "NC_000001.11:g.69301G>A",
+        "vcf": {
+          "alt": "A",
+          "chr": "chr1",
+          "pos": "69301",
+          "ref": "G"
+        }
+      }
+    },
+    "reference_sequence_records": {
+      "protein": "https://www.ncbi.nlm.nih.gov/nuccore/NP_001005484.2",
+      "transcript": "https://www.ncbi.nlm.nih.gov/nuccore/NM_001005484.2"
+    },
+    "refseqgene_context_intronic_sequence": "",
+    "rna_variant_descriptions": null,
+    "selected_assembly": "hg19",
+    "submitted_variant": "NM_001005484.2:c.274G>A",
+    "transcript_description": "Homo sapiens olfactory receptor family 4 subfamily F member 5 (OR4F5), mRNA",
+    "validation_warnings": [],
+    "variant_exonic_positions": {
+      "NC_000001.10": {
+        "end_exon": "3",
+        "start_exon": "3"
+      },
+      "NC_000001.11": {
+        "end_exon": "3",
+        "start_exon": "3"
+      }
+    }
+  },
+  "flag": "gene_variant",
+  "metadata": {
+    "variantvalidator_hgvs_version": "2.2.0",
+    "variantvalidator_version": "2.2.1.dev492+g032aa70",
+    "vvdb_version": "vvdb_2023_8",
+    "vvseqrepo_db": "VV_SR_2023_05/master",
+    "vvta_version": "vvta_2023_05"
+  }
+}
