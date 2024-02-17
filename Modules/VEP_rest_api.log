@@ -6,3 +6,19 @@ INFO:VEP_rest_api:Annotation data for GRCh37:
 INFO:VEP_rest_api:
 Annotation data for GRCh38:
 INFO:VEP_rest_api:Data retrieval successful!
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): grch37.rest.ensembl.org:443
+DEBUG:urllib3.connectionpool:https://grch37.rest.ensembl.org:443 "GET /vep/human/hgvs/NM_000138.5:c.356G%3EA HTTP/1.1" 200 1603
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rest.ensembl.org:443
+DEBUG:urllib3.connectionpool:https://rest.ensembl.org:443 "GET /vep/human/hgvs/NM_000138.5:c.356G%3EA HTTP/1.1" 200 2636
+INFO:VEP_rest_api:Annotation data for GRCh37:
+INFO:VEP_rest_api:
+Annotation data for GRCh38:
+INFO:VEP_rest_api:Data retrieval successful!
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): grch37.rest.ensembl.org:443
+DEBUG:urllib3.connectionpool:https://grch37.rest.ensembl.org:443 "GET /vep/human/hgvs/NM_000138.5:c.356G%3EA HTTP/1.1" 200 1603
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rest.ensembl.org:443
+DEBUG:urllib3.connectionpool:https://rest.ensembl.org:443 "GET /vep/human/hgvs/NM_000138.5:c.356G%3EA HTTP/1.1" 200 2636
+INFO:VEP_rest_api:Annotation data for GRCh37:
+INFO:VEP_rest_api:
+Annotation data for GRCh38:
+INFO:VEP_rest_api:Data retrieval successful!
