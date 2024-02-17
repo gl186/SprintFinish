@@ -2,3 +2,11 @@ DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rest.variantvali
 DEBUG:urllib3.connectionpool:https://rest.variantvalidator.org:443 "GET /LOVD/lovd/hg19/NC_000017.10:g.48275363C%3EA/all/raw/False/False HTTP/1.1" 200 2518
 INFO:LOVD_rest_api:LOVD annotation
 INFO:LOVD_rest_api:LOVD data retrieval succesful
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rest.variantvalidator.org:443
+DEBUG:urllib3.connectionpool:https://rest.variantvalidator.org:443 "GET /LOVD/lovd/hg19/NC_000017.10:g.48275363C%3EA/all/raw/False/False HTTP/1.1" 200 2518
+INFO:LOVD_rest_api:LOVD annotation
+INFO:LOVD_rest_api:LOVD data retrieval succesful
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): rest.variantvalidator.org:443
+DEBUG:urllib3.connectionpool:https://rest.variantvalidator.org:443 "GET /LOVD/lovd/hg19/NC_000017.10:g.48275363C%3EA/all/raw/False/False HTTP/1.1" 200 2518
+INFO:LOVD_rest_api:LOVD annotation
+INFO:LOVD_rest_api:LOVD data retrieval succesful
