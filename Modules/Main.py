@@ -6,8 +6,6 @@ This module is the central module that will be used to call upon the other modul
 # Import modules that will be called to complete requests from the Main.py API
 import module1_variantrecoder
 import module2_variantvalidator
-import rev_Sonja_code
-import module4_VV_VEP_final
 import module5_SPDI
 import logging
 
@@ -28,8 +26,7 @@ logging.critical("This is a critical message")
 print(logger.level)
 
 # Import functions from the other modules
-from flask import Flask, redirect, url_for, request
-
+from flask import Flask
 
 app = Flask(__name__)
 
