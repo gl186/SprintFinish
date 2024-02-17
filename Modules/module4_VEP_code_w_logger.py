@@ -22,7 +22,7 @@ logger.setLevel(logging.INFO)
 # We will also log to a file
 # Log with a rotating file-handler. This sets the maximum size of the log to 0.5Mb and allows two additional logs
 # The logs are then deleted and replaced in rotation
-logHandler = handlers.RotatingFileHandler('../ProjectScripts/Modules/module4_VV_VEP/VEP_rest_api.log', maxBytes=500000, backupCount=2)
+logHandler = handlers.RotatingFileHandler('/home/ayurahman/SprintFinish/Modules/VEP_rest_api.log', maxBytes=500000, backupCount=2)
 # We want to minimise the amount of information we log to capturing bugs
 logHandler.setLevel(logging.ERROR)
 logger.addHandler(logHandler)
