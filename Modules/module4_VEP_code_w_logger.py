@@ -65,7 +65,8 @@ def get_variant_annotation(hgvs_variant):
     except requests.RequestException as e:
         logger.error(f"Error fetching data: {e}")
     else:
-        logger.info("Data retrieval successful!")
+        logger.info("VEP Data retrieval successful!")
+        print("VEP data retrieval successful!")
 
 
 # Example usage

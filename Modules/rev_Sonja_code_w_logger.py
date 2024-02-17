@@ -56,7 +56,8 @@ def get(genome_build, variant_description, select_transcripts):
         print(f"Error fetching LOVD variant data: {e}")
         raise RemoteConnectionError
     else:
-        logger.info("LOVD data retrieval succesful")
+        logger.info("LOVD data retrieval successful")
+        print("LOVD data retrieval successful")
 
 # Example usage
 variant_description = "NC_000017.10:g.48275363C>A"
