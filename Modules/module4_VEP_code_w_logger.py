@@ -12,17 +12,17 @@ Logging
 """
 # Create logger
 
-logging.basicConfig(filename="/home/ayurahman/SprintFinish/Modules/VEP_rest_api.log", level=logging.DEBUG)
+logging.basicConfig(filename="/home/ayurahman/SprintFinish/Modules/VEP_module.log", level=logging.DEBUG)
 
 
-logger = logging.getLogger('VEP_rest_api')
+logger = logging.getLogger('VEP_module')
 # We are setting 2 types of logging. To screen at the level DEBUG
 logger.setLevel(logging.INFO)
 
 # We will also log to a file
 # Log with a rotating file-handler. This sets the maximum size of the log to 0.5Mb and allows two additional logs
 # The logs are then deleted and replaced in rotation
-logHandler = handlers.RotatingFileHandler('/home/ayurahman/SprintFinish/Modules/VEP_rest_api.log', maxBytes=500000, backupCount=2)
+logHandler = handlers.RotatingFileHandler('/home/ayurahman/SprintFinish/Modules/VEP_module.log', maxBytes=500000, backupCount=2)
 # We want to minimise the amount of information we log to capturing bugs
 logHandler.setLevel(logging.ERROR)
 logger.addHandler(logHandler)
