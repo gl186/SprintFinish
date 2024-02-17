@@ -12,7 +12,7 @@ Logging
 """
 # Create logger
 
-logging.basicConfig(filename="/home/ayurahman/SprintFinish/ProjectScripts/Modules/module4_VV_VEP/VEP_rest_api.log", level=logging.DEBUG)
+logging.basicConfig(filename="/home/ayurahman/SprintFinish/Modules/VEP_rest_api.log", level=logging.DEBUG)
 
 
 logger = logging.getLogger('VEP_rest_api')
