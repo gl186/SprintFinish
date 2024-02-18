@@ -1,32 +1,36 @@
-# Import modules
-from flask import Flask, make_response
-from flask_restx import Api, Resource
+"""
+A simple REST interface for retrieving genomic HGVS and genomic coordinates from Variant Validator from a RefSeq transcript ID.
+Lisa
+"""
+#import modules
 import requests
-import logging
+import json
 
-# Define the application as a Flask app with the name defined by __name__ (i.e. the name of the current module)
-application = Flask(__name__)
+def get_genomic_info_from_transcript(transcript_id):
+    api_url = f"https://rest.variantvalidator.org/transcript/{transcript_id}"
+    try:
+        response = requests.get(api_url)
+        response.raise_for_status()
+        data = response.json()
 
-# Define the API as api
-api = Api(app = application)
+        genomic_hgvs = data.get('genomicHgvs')
+        genomic_coordinates = data.get('genomicCoordinates')
 
-# Define a name-space to be read Swagger UI which is built in to Flask-RESTX
-# The first variable is the path of the namespace the second variable describes the space
-
-# Note: 'rst' stands for RefSeqTranscript
-rst_space = api.namespace('RefSeqTranscript', description = 'Return a genomic HGVS transcript and genome coordinate')
-
-@rst_space.route("/variantvalidator/<string:genome_build>/<string:variant_description>/<string:select_transcripts>")
-class RefSeqTranscriptClass(Resource):
-    def get(self, genome_build, variant_description, select_transcripts):
-
-        #Make a request to the current variantvalidator rest-api
-        url ='/'.join(["https://rest.variantvalidator.org/variantvalidator,genome_build, variant_description, select_trasncripts"])
-        validation = request.get(url)
-        content =validation.json()
-        return content
+        if genomic_hgvs and genomic_coordinates:
+            return genomic_hgvs, genomic_coordinates
+        else:
+            print("Genomic information not found.")
+            return None, None
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
+        return None, None
 
 
-# Allows app to be run in debug mode
-if __name__ == '__main__':
-    application.debug = True #enable debugging mode
+# Example usage
+transcript_id = input("Enter RefSeq transcript ID: ")   # Replace with your RefSeq transcript ID
+genomic_hgvs, genomic_coordinates = get_genomic_info_from_transcript(transcript_id)
+
+if genomic_hgvs and genomic_coordinates:
+    print(f"Genomic HGVS: {genomic_hgvs}")
+    print(f"Genomic Coordinates: {genomic_coordinates}")
+
