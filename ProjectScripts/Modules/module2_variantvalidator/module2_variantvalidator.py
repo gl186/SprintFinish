@@ -7,7 +7,7 @@ import requests
 import json
 
 def get_genomic_info_from_transcript(transcript_id):
-    api_url = f"https://rest.variantvalidator.org/VariantValidator/variantvalidator/GRCh38/NM_000059.3/Return%20all%20possible%20transcripts?content-type=application%2Fjson"
+    api_url = "https://rest.variantvalidator.org/VariantValidator/variantvalidator/GRCh38/NM_000059.3/Return%20all%20possible%20transcripts?content-type=application%2Fjson"
     try:
         response = requests.get(api_url)
         response.raise_for_status()
