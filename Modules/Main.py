@@ -6,6 +6,8 @@ This module is the central module that will be used to call upon the other modul
 # Import modules that will be called to complete requests from the Main.py API
 import module1_variantrecoder
 import module2_variantvalidator
+import module3_VV_LOVD_code_only
+import module4_VEP_code_only
 import module5_SPDI
 import logging
 
@@ -32,27 +34,27 @@ app = Flask(__name__)
 
 
 # Routes for module functionality
-@app.route("/SprintFinish/Modules/module1_variantrecoder/module1_variantrecoder.py")
+@app.route("/SprintFinish/Modules/module1_variantrecoder.py")
 def call_module1_function():
     result = module1_variantrecoder.function1()
     return result
 
-@app.route("/SprintFinish/Modules/module2_variantvalidator/module2_variantvalidator.py")
+@app.route("/SprintFinish/Modules/module2_variantvalidator.py")
 def call_module2_function():
     result = module2_variantvalidator.function2()
     return result
 
-@app.route("/SprintFinish/Modules/module3_VV_LOVD/rev_Sonja_code.py")
+@app.route("/SprintFinish/Modules/module3_VV_LOVD_code_only.py")
 def call_module3_function():
-    result = rev_Sonja_code.function3()
+    result = module3_VV_LOVD_code_only.function3()
     return result
 
-@app.route("/SprintFinish/Modules/module4_VV_VEP/module4_VV_VEP_final.py")
+@app.route("/SprintFinish/Modules/module4_VEP_code_only.py")
 def call_module4_function():
-    result = module4_VV_VEP_final.function4()
+    result = module4_VEP_code_only.function4()
     return result
 
-@app.route("SprintFinish/Modules/module5_SPDI/module5_SPDI.py")
+@app.route("SprintFinish/Modules/module5_SPDI.py")
 def call_module5_function():
     result = module5_SPDI.function5()
     return result

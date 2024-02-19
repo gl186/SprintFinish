@@ -1,37 +1,36 @@
 """
-A simple REST interface for retrieving variant validator information from the Variant Validator REST API for an RefSeq transcript.
-This interface is implemented using Flask, Flask-RestX, and Swagger UI.
+A simple REST interface for retrieving genomic HGVS and genomic coordinates from Variant Validator from a RefSeq transcript ID.
+Lisa
 """
-
-# Import modules
-from flask import Flask, make_response
-from flask_restx import Api, Resource
+#import modules
 import requests
+import json
 
-# Define the application as a Flask app with the name defined by __name__ (i.e. the name of the current module)
-application = Flask(__name__)
+def get_genomic_info_from_transcript(transcript_id):
+    api_url = "https://rest.variantvalidator.org/VariantValidator/variantvalidator/GRCh38/transcript_id/Return%20all%20possible%20transcripts?content-type=application%2Fjson"
+    try:
+        response = requests.get(api_url)
+        response.raise_for_status()
+        data = response.json()
 
-# Define the API as api
-api = Api(app=application)
+        genomic_hgvs = data.get('genomicHgvs')
+        genomic_coordinates = data.get('genomicCoordinates')
 
-# Define a name-space to be read Swagger UI which is built into Flask-RESTX
-# The first variable is the path of the namespace, and the second variable describes the space
+        if genomic_hgvs and genomic_coordinates:
+            return genomic_hgvs, genomic_coordinates
+        else:
+            print("Genomic information not found.")
+            return None, None
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
+        return None, None
 
-# Note: 'rst' stands for RefSeqTranscript
-rst_space = api.namespace('RefSeqTranscript', description='Return a genomic HGVS transcript and genome coordinate')
 
-@rst_space.route("/variantvalidator/<string:genome_build>/<string:variant_description>/<string:select_transcripts>")
-class RefSeqTranscriptClass(Resource):
-    def get(self, genome_build, variant_description, select_transcripts):
+# Example usage
+transcript_id = input("Enter RefSeq transcript ID: ")   # Replace with your RefSeq transcript ID
+genomic_hgvs, genomic_coordinates = get_genomic_info_from_transcript(transcript_id)
 
-        # Make a request to the current variantvalidator rest-api
-        url = '/'.join(["https://rest.variantvalidator.org/variantvalidator", genome_build, variant_description, select_transcripts])
-        validation = requests.get(url)
-        content = validation.json()
-        return content
-
-# Allows the app to be run in debug mode
-if __name__ == '__main__':
-    application.debug = True  # enable debugging mode
-    application.run()
+if genomic_hgvs and genomic_coordinates:
+    print(f"Genomic HGVS: {genomic_hgvs}")
+    print(f"Genomic Coordinates: {genomic_coordinates}")
 
