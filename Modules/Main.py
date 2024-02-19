@@ -34,11 +34,17 @@ app = Flask(__name__)
 
 
 # Routes for module functionality
+"""
+Input should be an Ensembl transcript
+"""
 @app.route("/SprintFinish/Modules/module1_variantrecoder.py")
 def call_module1_function():
     result = module1_variantrecoder.function1()
     return result
 
+"""
+Input should be a Refseq transcript
+"""
 @app.route("/SprintFinish/Modules/module2_variantvalidator.py")
 def call_module2_function():
     result = module2_variantvalidator.function2()
@@ -51,6 +57,7 @@ Input for module3 should be the output from module1 or module2
 def call_module3_function():
     result = module3_VV_LOVD_code_only.function3()
     return result
+
 """
 Input for module4 should be the output from module1 or module2
 """
