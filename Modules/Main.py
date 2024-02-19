@@ -44,11 +44,16 @@ def call_module2_function():
     result = module2_variantvalidator.function2()
     return result
 
+"""
+Input for module3 should be the output from module1 or module2
+"""
 @app.route("/SprintFinish/Modules/module3_VV_LOVD_code_only.py")
 def call_module3_function():
     result = module3_VV_LOVD_code_only.function3()
     return result
-
+"""
+Input for module4 should be the output from module1 or module2
+"""
 @app.route("/SprintFinish/Modules/module4_VEP_code_only.py")
 def call_module4_function():
     result = module4_VEP_code_only.function4()
