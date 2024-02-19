@@ -4,6 +4,7 @@ dynamic = ["version"]
 description = ""
 license = {file = "LICENSE.txt"}
 authors = [{name = "SprintFinish Contributors"}]
+readme = "README.md"
 
 requires-python = ">=3.12"
 dependencies = {file = ["requirements.txt"]}
