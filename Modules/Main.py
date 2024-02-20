@@ -27,12 +27,6 @@ logging.critical("This is a critical message")
 
 print(logger.level)
 
-# Import functions from the other modules
-from flask import Flask
-
-app = Flask(__name__)
-
-
 # Routes for module functionality
 """
 Input should be an Ensembl transcript
@@ -70,7 +64,3 @@ def call_module4_function():
 def call_module5_function():
     result = module5_SPDI.function5()
     return result
-
-if __name__ == "__main__":
-    app.run(debug=True)
-    app.run(host="127.0.0.1", port=5000)  # Specify a host and port for the app

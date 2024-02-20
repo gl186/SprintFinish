@@ -1,5 +1,5 @@
 [project]
-name = "SprintFinish"
+name = "Project"
 dynamic = ["version"]
 description = ""
 license = {file = "LICENSE.txt"}
@@ -16,12 +16,10 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 
-[project.urls]
-""
 
 [tool.setuptools.packages.find]
 where = ["."] # Look for packages in the 'root' directory
-include = ["Modules*"] # Match package names for
+include = ["Newprojectname*"] # Match package names for
 
 [build-system]
 requires = ["setuptools>=19", "setup_scm[toml]>=6.2", "wheel"]
