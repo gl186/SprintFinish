@@ -20,5 +20,3 @@ def get(self, hgvs, contextuals):
         return {"error": f"Error fetching module5_SPDI variant data: {e}"}, 500
 
 
-# REMOVE if __name__ == "__main__":
-# REMOVE    app.run(debug=True)
