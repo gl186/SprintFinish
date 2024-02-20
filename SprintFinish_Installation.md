@@ -1,6 +1,7 @@
 **INSTALLATION OF SPRINTFINISH**
 
 This document gives the instruction to install the package and accompanying databases required for SprintFinish.
+
 **For systems Linux and Mac OS X. For other systems or if you cannot install the databases, we recommend installing via docker.**
 
 _**Pre-requisites**_
@@ -50,8 +51,10 @@ $ pip install .
 Please make all Pull Requests to the develop branch. If you are unsure, contact admin via issues.
 
 For development purposes, use the following,
+
 $ pip install -e 
 
 **Configuration**
 
-Before using SprintFinish some configuration is required, please see the manual for further instruction.
+Before using SprintFinish some configuration is required. 
+Please see the manual for further instruction.
