@@ -1,0 +1,29 @@
+[project]
+name = "SprintFinish"
+dynamic = ["version"]
+description = ""
+license = {file = "LICENSE.txt"}
+authors = [{name = "SprintFinish Contributors"}]
+readme = "README.md"
+
+requires-python = ">=3.12"
+dependencies = {file = ["requirements.txt"]}
+
+classifiers = [
+    "Development Status :: 5-Production/Stable",
+    "Intended Audience :: Users",
+    "Topic :: Software Developement",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+""
+
+[tool.setuptools.packages.find]
+where = ["."] # Look for packages in the 'root' directory
+include = ["Modules*"] # Match package names for
+
+[build-system]
+requires = ["setuptools>=19", "setup_scm[toml]>=6.2", "wheel"]
+build-backend = "setuptools.build_meta"
+#or [tool.setuptools.dynamic] to use dynamic metadata?
