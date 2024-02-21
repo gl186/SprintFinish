@@ -1,3 +1,6 @@
+"""
+An API used to make calls to the Main app modules
+"""
 from flask import Flask
 from flask_restx import Api, Resource, fields
 from Main import main  # Importing the main function we created earlier
@@ -42,6 +45,6 @@ class TranscriptAnalysis(Resource):
         result = main(transcript_id)
         return result
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
-
+    app.run(host="127.0.0.1", port=5000)  # Specify a host and port for the app
