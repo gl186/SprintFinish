@@ -10,6 +10,7 @@ import module2_variantvalidator
 import module3_VV_LOVD_code_only
 import module4_VEP_code_only
 import module5_SPDI
+import logging
 
 app = Flask(__name__)
 
