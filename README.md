@@ -1,10 +1,10 @@
 # SprintFinish
-Sprint 2 and final assessment project for Group 1 (Module 3 PGCert Clinical Bioniformatics Intro to Programming)
+Sprint 2 and final assessment project for Group 1 (Module 3 PGCert Clinical Bioinformatics Intro to Programming)
 SprintFinish is a Flask-based RESTful API for retrieving genomic data, including ensemble transcripts, RefSeq transcripts, LOVD variant annotations, and VEP variant data.
 
 This README provides an overview of the SprintFinish RESTful API, installation instructions, usage guidelines, testing procedures, contribution guidelines, and license information
 
-This pyhthon API integration will accept GEL variant descriptions (ie. c. 4375C>T) and provide valid and accurate genome, transcript and protein variant descriptions.
+This python API integration will accept GEL variant descriptions (ie. c. 4375C>T) and provide valid and accurate genome, transcript and protein variant descriptions.
 This product will gather the information from Variant Validator REST aPI and return the data as a Python dictionary.
 
 # About rest_variantValidator
