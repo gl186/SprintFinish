@@ -6,8 +6,8 @@ from certifi.__main__ import args
 # Import modules that will be called to complete requests from the Main.py API
 from flask import Flask, make_response
 from flask_restx import Api, Resource, reqparse
-from Modules.module1_variantrecoder import ensembleMapper
 import logging
+from Modules import Main
 
 # Determine logger format and create the file
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
@@ -35,14 +35,14 @@ VariantAnnotationToolNameSpace = api.namespace('transcript-mapper',
 parser = reqparse.RequestParser()
 parser.add_argument('content-type',
                     type=str,
-                    help='Accepted:\n- application/json'
+                    help='Accepts:\n- application/json'
                          '\n- application/xml' )
 
 # TODO: Support xml response type (done.....)
 
 
 @api.representation('text/xml')
-def application_xml(data, code, headers):
+def xml(data, code, headers):
     resp = make_response(data, code, headers)
     resp.headers['Content-Type'] = 'text/xml'
     return resp
@@ -59,15 +59,15 @@ def json(data, code, headers):
                                  ">select ensemble (with or without version number)\n"
                                  ">select refseq(must have version number)\n"
                                  ">   all (at the latest version for each transcript)\n"
-          "\n***Accepted:***\n"
+          "\n***Accepts:***\n"
           ">   - refseq (return data for RefSeq transcript models)\n"
           ">   - ensembl (return data for ensembl transcript models)\n"
            )
 @api.param("transcript_model",   "\n***ensemble example***\n"
-                                 ">   ENST00000456328.2|ENST00000496771.5|ENST00000373020|ENSP00000362111\n"
+                                 ">   ENST00000456328.2\n ENST00000496771.5\n ENST00000373020\n ENSP00000362111\n"
                                  "\n***refseq example***\n"
-                                 ">   NM_000093.4|NM_001278074.1|NM_000093.3")
-@api.param("genome_build", "***Accepted:***\n"
+                                 ">   NM_000093.4\n NM_001278074.1\n NM_000093.3")
+@api.param("genome_build", "***Accepts:***\n"
                            ">   - GRCh37\n"
                            ">   - GRCh38\n"
                            ">   - hg19\n"
@@ -79,29 +79,24 @@ class VariantAnnotationToolClass(Resource):
         # call the module1_variantrecorder.ensembleMapper function
         # TODO: if..statement based on transcript_model
         # TODO: Also embed the logger within if condition (done)
-        if "ENST" in transcript_model:
-            hgvs_genomic = variantrecorder(hgvs_transcript, genome_build)
+
+        # Remove all whitespace, then make lowercase
+        select_transcripts = select_transcripts.replace(" ", "").lower()
+        if select_transcripts == "ensembl":
+            # hgvs_genomic = Main.module(1)function
             logger.info("Map ensemble to HGVS transcript")
-        if "NM" in transcript_model:
-            hgvs_genomic = variantvalidator(hgvs_transcript, genome_build)
+        if select_transcripts == "refseq":
+            # hgvs_genomic = Main.module(2)function
             logger.info("Map refseq to HGVS transcript")
 
-        if transcript_model == 'None' or transcript_model == 'none':
-            transcript_model = None
-        if select_transcripts == 'None' or select_transcripts == 'none':
-            select_transcripts = None
-
-
-        hgvs_transcript = ensembleMapper(ensembletranscript, RefseqTranscript)
-        return {"response is ": transcript_model}
-
         # Overrides the default response route so that the standard HTML URL can return any specified format
+        content = {"hgvs":8}
         if args['content-type'] == 'application/json':
             # example: http://127.0.0.1:5000.....bob?content-type=application/json
-            return representations.application_json(content, 200, None)
+            return json(content, 200, None)
         # example: http://127.0.0.1:5000.....?content-type=text/xml
         elif args['content-type'] == 'text/xml':
-            return representations.xml(content, 200, None)
+            return xml(content, 200, None)
         else:
             # Return the api default output
             return content
