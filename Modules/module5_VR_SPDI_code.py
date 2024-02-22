@@ -1,5 +1,5 @@
 """
-Get SPDI using Variant Recorder
+Get SPDI using Ensembl Variant Recoder
 """
 # Import modules
 import requests
