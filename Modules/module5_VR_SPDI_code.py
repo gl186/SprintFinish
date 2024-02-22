@@ -3,12 +3,11 @@ Get SPDI using Variant Recorder
 """
 # Import modules
 import requests
-import sys
 import json
 
 def get_SPDI(hgvs):
-    server = "https://rest.ensembl.org"
-    ext = f"/variant_recoder/human/{hgvs}?"
+    server = "https://rest.ensembl.org/"
+    ext = f"/variant_recoder/human/{hgvs}?fields=spdi"
 
     try:
         r = requests.get(server + ext, headers={"Content-Type": "application/json"})
@@ -17,7 +16,7 @@ def get_SPDI(hgvs):
         return decoded
     except requests.RequestException as e:
         print(f"An error occurred: {e}")
-        sys.exit()
+
 
 # Example usage:
 variant_hgvs = "NM_000138.5:c.356G>A"
