@@ -2,12 +2,12 @@
 """
 This module is the central module that will be used to call upon the other modules and logs its usage.
 """
-from certifi.__main__ import args
 # Import modules that will be called to complete requests from the Main.py API
 from flask import Flask, make_response
 from flask_restx import Api, Resource, reqparse
+from dicttoxml import dicttoxml
 import logging
-from Modules import Main
+# from Modules import Main
 
 # Determine logger format and create the file
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
@@ -26,7 +26,6 @@ api = Api(app=application)
 # The first variable is the path of the namespace the second variable describes the space
 
 # implemented the swagger UI and made the shape of API : Linda
-
 VariantAnnotationToolNameSpace = api.namespace('transcript-mapper',
                                                description='Return a genomic, transcript and protein description')
 
@@ -36,16 +35,18 @@ parser = reqparse.RequestParser()
 parser.add_argument('content-type',
                     type=str,
                     help='Accepts:\n- application/json'
-                         '\n- application/xml' )
-
-# TODO: Support xml response type (done.....)
+                         '\n- application/xml')
 
 
+# Support both xml and json response type
 @api.representation('text/xml')
 def xml(data, code, headers):
+    data = dicttoxml(data)
     resp = make_response(data, code, headers)
     resp.headers['Content-Type'] = 'text/xml'
     return resp
+
+
 @api.representation('application/json')
 def json(data, code, headers):
     resp = make_response(data, code, headers)
@@ -53,35 +54,32 @@ def json(data, code, headers):
     return resp
 
 
-# TODO: add select_transcript as route path (done)
-@VariantAnnotationToolNameSpace.route("/<string:transcript_model>")
+@VariantAnnotationToolNameSpace.route("/<string:select_transcripts>/<string:transcript_model>/<string:genome_build>")
 @api.param("select_transcripts", "***Return all possible transcripts***\n"
                                  ">select ensemble (with or without version number)\n"
                                  ">select refseq(must have version number)\n"
                                  ">   all (at the latest version for each transcript)\n"
-          "\n***Accepts:***\n"
-          ">   - refseq (return data for RefSeq transcript models)\n"
-          ">   - ensembl (return data for ensembl transcript models)\n"
+                                 "\n***Accepts:***\n"
+                                 ">   - refseq (return data for RefSeq transcript models)\n"
+                                 ">   - ensembl (return data for ensembl transcript models)\n"
            )
-@api.param("transcript_model",   "\n***ensemble example***\n"
-                                 ">   ENST00000456328.2\n ENST00000496771.5\n ENST00000373020\n ENSP00000362111\n"
-                                 "\n***refseq example***\n"
-                                 ">   NM_000093.4\n NM_001278074.1\n NM_000093.3")
+@api.param("transcript_model", "\n***ensemble example***\n"
+                               ">   ENST00000456328.2\n ENST00000496771.5\n ENST00000373020\n ENSP00000362111\n"
+                               "\n***refseq example***\n"
+                               ">   NM_000093.4\n NM_001278074.1\n NM_000093.3")
 @api.param("genome_build", "***Accepts:***\n"
                            ">   - GRCh37\n"
                            ">   - GRCh38\n"
                            ">   - hg19\n"
                            ">   - hg38")
-
 class VariantAnnotationToolClass(Resource):
     @api.doc(parser=parser)
-    def get(self, transcript_model, genome_build, select_transcripts):
-        # call the module1_variantrecorder.ensembleMapper function
-        # TODO: if..statement based on transcript_model
-        # TODO: Also embed the logger within if condition (done)
-
+    def get(self, select_transcripts, transcript_model, genome_build):
+        args = parser.parse_args()
         # Remove all whitespace, then make lowercase
         select_transcripts = select_transcripts.replace(" ", "").lower()
+        # Call modules/functions from Main module
+        # Depends on the selected transcript parameter
         if select_transcripts == "ensembl":
             # hgvs_genomic = Main.module(1)function
             logger.info("Map ensemble to HGVS transcript")
@@ -90,7 +88,7 @@ class VariantAnnotationToolClass(Resource):
             logger.info("Map refseq to HGVS transcript")
 
         # Overrides the default response route so that the standard HTML URL can return any specified format
-        content = {"hgvs":8}
+        content = {"hgvs": 8}
         if args['content-type'] == 'application/json':
             # example: http://127.0.0.1:5000.....bob?content-type=application/json
             return json(content, 200, None)
