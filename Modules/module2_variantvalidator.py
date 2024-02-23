@@ -25,7 +25,6 @@ def get_genomic_info_from_transcript(transcript_id):
         print(f"Error: {e}")
         return None, None
 
-
 # Example usage
 transcript_id = input("Enter RefSeq transcript ID: ")   # Replace with your RefSeq transcript ID
 genomic_hgvs, genomic_coordinates = get_genomic_info_from_transcript(transcript_id)
