@@ -1,7 +1,8 @@
 """
 Unit Testing of Module4_VEP_code.py using Pytest- Nurhayu
 """
-from module4_VEP_code_only import get_variant_annotation  # Import module4 function
+from Modules.module4_VEP_code_only import get_variant_annotation  # Import module4 function
+# By adding Modules. in front of the function module create a path for the test to import it even if the test is in a different folder -Solved by Sonja
 import pytest
 
 # The code that interacts with Ensembl VEP
