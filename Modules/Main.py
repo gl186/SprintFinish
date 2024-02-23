@@ -39,30 +39,39 @@ def call_module_function():
         result = {
             "module1_output": module1_output,
             "transcript_id": input_data.get("transcript_id")
-        }
+         }
     elif "NM_" in input_data.get("transcript_id", ""):
         module2_output = module2_variantvalidator.function2()
         result = {
-            "module2_output": module2_output,
-            "transcript_id": input_data.get("transcript_id")
-        }
+             "module2_output": module2_output,
+             "transcript_id": input_data.get("transcript_id")
+         }
     else:
         return "Invalid input: transcript_id should contain 'ENST' or 'NM_'"
+
     return jsonify(result)
 
 
 @app.route("/module3_function", methods=["POST"])
 def call_module3_function():
     input_data = request.json  # Assuming JSON input
+    if input_data is None:
+        return "Invalid input: JSON data not provided"
+
+    # Define variant_description based on module1_output or module2_output
     if "module1_output" in input_data:
-        module3_output = module3_VV_LOVD_code_only.function3(input_data["module1_output"])
+        variant_description = input_data["module1_output"]
     elif "module2_output" in input_data:
-        module3_output = module3_VV_LOVD_code_only.function3(input_data["module2_output"])
+        variant_description = input_data["module2_output"]
     else:
         return "Invalid input: module1_output or module2_output not provided"
 
-    print("Module 3 Output:", module3_output)  # Print module3 output
-    return jsonify({"module3_output": module3_output})
+    # Call module 3 function to get mane variant description for GRCh37
+    dict_mane_variants_GRCh37 = module3_VV_LOVD_code_only.get_for_GRCh37(variant_description)
+    dict_mane_variants_GRCh38 = module3_VV_LOVD_code_only.get_for_GRCh38(variant_description)
+
+    print("Module 3 Output:", dict_mane_variants_GRCh37)  # Print module3 output
+    return jsonify({"variants_GRCh37": dict_mane_variants_GRCh37, "variants_GRCh38": dict_mane_variants_GRCh38})
 
 
 @app.route("/module4_function", methods=["POST"])
