@@ -26,10 +26,10 @@ def get_genomic_info_from_transcript(transcript_id):
         return None, None
 
 # Example usage
-transcript_id = input("Enter RefSeq transcript ID: ")   # Replace with your RefSeq transcript ID
+transcript_id = "NM_000088.4"   # Replace with your RefSeq transcript ID
 genomic_hgvs, genomic_coordinates = get_genomic_info_from_transcript(transcript_id)
 
 if genomic_hgvs and genomic_coordinates:
-    print(f"Genomic HGVS: {genomic_hgvs}")
-    print(f"Genomic Coordinates: {genomic_coordinates}")
+     print(f"Genomic HGVS: {genomic_hgvs}")
+     print(f"Genomic Coordinates: {genomic_coordinates}")
 
