@@ -78,10 +78,10 @@ class VariantAnnotationToolClass(Resource):
     def get(self, select_transcripts, transcript_model, genome_build):
         hgvs_genomic = {"results": "Genomic information not found"}
         args = parser.parse_args()
-        # Remove all whitespace, then make lowercase
-        select_transcripts = select_transcripts.replace(" ", "").lower()
-        transcript_model = transcript_model.replace(" ", "").lower()
-        genome_build = genome_build.replace(" ", "").lower()
+        # Remove all whitespace
+        select_transcripts = select_transcripts.replace(" ", "")
+        transcript_model = transcript_model.replace(" ", "")
+        genome_build = genome_build.replace(" ", "")
         # Call modules/functions from Main module
         # Depends on the selected transcript parameter
         if select_transcripts == "ensembl":
