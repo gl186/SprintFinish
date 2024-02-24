@@ -1,5 +1,5 @@
 [project]
-name = "Project"
+name = "Varan"
 dynamic = ["version"]
 description = ""
 license = {file = "LICENSE.txt"}
@@ -19,9 +19,8 @@ classifiers = [
 
 [tool.setuptools.packages.find]
 where = ["."] # Look for packages in the 'root' directory
-include = ["Newprojectname*"] # Match package names for
+include = ["Varan*"] # Match package names for
 
 [build-system]
 requires = ["setuptools>=19", "setup_scm[toml]>=6.2", "wheel"]
 build-backend = "setuptools.build_meta"
-#or [tool.setuptools.dynamic] to use dynamic metadata?
