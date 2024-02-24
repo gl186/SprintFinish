@@ -3,14 +3,19 @@ A function maps the ensemble transcript to HGVS annotation using the variant rec
 """
 # Import modules
 import requests
-from flask import make_response, jsonify
 
 
-def ensembleMapper(ensembleTranscript):
+def ensemblMapper(ensemblTranscript):
     # Make a request to the current VariantRecorder rest-API
     url = "https://rest.ensembl.org"
-    path = "/variant_recoder/human/" + ensembleTranscript
+    path = "/variant_recoder/human/" + ensemblTranscript
 
     response = requests.get(url + path, headers={"Content-Type": "application/json"})
-    return make_response(jsonify({"Genomic-HGVS": response.json()}), 200)
+    print("response", response)
+    return {"Genomic-HGVS": response.json()}
 
+
+ensemblTranscript = "ENST00000366667:c.803C>T"  # Replace with your ensemblTranscript transcript ID
+response = ensemblMapper(ensemblTranscript)
+
+print(f"Genomic HGVS: {response}")
