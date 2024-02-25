@@ -4,13 +4,13 @@ This module is the central module that will be used to call upon the other modul
 """
 
 # Import modules that will be called to complete requests from the Main.py API
-from flask import Flask, request, jsonify
-import module1_variantrecoder
-import module2_variantvalidator
-import module3_VV_LOVD_code_only
-import module4_VEP_code_only
-import module5_SPDI
-import module5_VR_SPDI_code
+from flask import Flask, jsonify
+from Modules import module1_variantrecoder
+from Modules import module2_variantvalidator
+# from Modules import module3_VV_LOVD_code_only
+# from Modules import module4_VEP_code_only
+# from Modules import module5_SPDI
+# from Modules import module5_VR_SPDI_code
 import logging
 
 app = Flask(__name__)
@@ -33,30 +33,28 @@ print(logger.level)
 
 
 # Routes for module functionality
-@app.route("/module_function", methods=["POST"])
-def call_module_function():
-    input_data = request.json  # Assuming JSON input
-    if "ENST" in input_data.get("ensembleTranscript", ""):
-        module1_output = module1_variantrecoder.ensembleMapper(ensembleTranscript)
+def call_module1_function(transcript_model):
+    if "ENST" in transcript_model:
+        module1_output = module1_variantrecoder.ensemblMapper(transcript_model)
         result = {
             "module1_output": module1_output,
-            "ensembleTranscript": input_data.get("ensembleTranscript")
-         }
-    elif "NM_" in input_data.get("transcript_id", ""):
-        module2_output = module2_variantvalidator.get_genomic_info_from_transcript(transcript_id)
+            "ensembleTranscript": transcript_model
+        }
+    elif "NM_" in transcript_model:
+        module2_output = module2_variantvalidator.get_genomic_info_from_transcript(transcript_model)
         result = {
-             "module2_output": module2_output,
-             "transcript_id": input_data.get("transcript_id")
-         }
+            "module2_output": module2_output,
+            "transcript_id": transcript_model
+        }
     else:
         return "Invalid input: transcript_id should contain 'ENST' or 'NM_'"
 
+    print("module1_output", result)
     return jsonify(result)
 
 
-@app.route("/module3_function", methods=["POST"])
-def call_module3_function():
-    input_data = request.json  # Assuming JSON input
+'''
+def call_module3_function(input_data):
     if input_data is None:
         return "Invalid input: JSON data not provided"
 
@@ -76,9 +74,7 @@ def call_module3_function():
     return jsonify({"MANE_GRCh37": dict_mane_variants_grch37, "MANE_GRCh38": dict_mane_variants_grch38})
 
 
-@app.route("/module4_function", methods=["POST"])
-def call_module4_function():
-    input_data = request.json  # Assuming JSON input
+def call_module4_function(input_data):
     if input_data is None:
         return "Invalid input: JSON data not provided"
 
@@ -97,9 +93,7 @@ def call_module4_function():
     return jsonify({"VEP_annotations": dict_vep_annotation})
 
 
-@app.route("/module5_function", methods=["POST"])
-def call_module5_function():
-    input_data = request.json  # Assuming JSON input
+def call_module5_function(input_data):
     if input_data is None:
         return "Invalid input: JSON data not provided"
 
@@ -118,6 +112,4 @@ def call_module5_function():
     print("Module 5 SPDI Output:", dict_spdi_format, dict_spdi_detail)  # Print module5 output
     return jsonify({"SPDI_format": dict_spdi_format, "SPDI_detail": dict_spdi_detail})
 
-
-if __name__ == "__main__":
-    app.run(debug=True)
+'''

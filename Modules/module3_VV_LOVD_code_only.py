@@ -4,8 +4,6 @@ Simple python script using HGVS genomic output from module1 or 2 for Variant Val
 
 # Import modules
 import requests
-import json
-import module2_variantvalidator
 
 
 def get_for_GRCh37(variant_description):

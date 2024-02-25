@@ -5,8 +5,6 @@ Get SPDI format for HGVS genomic data
 import requests
 import json
 
-import module2_variantvalidator
-
 
 def get(hgvs):
     """Retrieve SPDI format for HGVS genomic data using the NCBI Variation Services API"""
