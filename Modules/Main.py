@@ -53,7 +53,6 @@ def call_module1_function(transcript_model):
     return jsonify(result)
 
 
-'''
 def call_module3_function(input_data):
     if input_data is None:
         return "Invalid input: JSON data not provided"
@@ -112,4 +111,3 @@ def call_module5_function(input_data):
     print("Module 5 SPDI Output:", dict_spdi_format, dict_spdi_detail)  # Print module5 output
     return jsonify({"SPDI_format": dict_spdi_format, "SPDI_detail": dict_spdi_detail})
 
-'''
