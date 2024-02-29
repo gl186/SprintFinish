@@ -178,9 +178,9 @@ class ExtraAnnotations(Resource):
         if select_extraannotaion == "vep":
             extra_annotation = Main.call_module4_function(genomic_transcript, select_extraannotaion)
             logger.info("VEP annotation form")
-        # if select_extraannotaion == "SPDI":
-        #     extra_annotation = Main.call_module5_function(genomic_transcript)
-        #     logger.info("SPDI annotation form")
+        if select_extraannotaion == "spdi":
+            extra_annotation = Main.call_module5_function(genomic_transcript)
+            logger.info("SPDI annotation form")
         # Overrides the default response route so that the standard HTML URL can return any specified format
         if args['content-type'] == 'application/json':
             # example: http://127.0.0.1:5000.....bob?content-type=application/json

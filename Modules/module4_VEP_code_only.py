@@ -27,13 +27,9 @@ def get_variant_annotation(select_extraannotaion, genomic_transcript):
 
     except requests.RequestException as e:
         print(f"Error fetching data: {e}")
-    else:
-        print("Data retrieval successful!")
+
 
 
 # Example usage
-genomic_transcript = "9:g.22125504G>C"
+# genomic_transcript = "9:g.22125504G>C"
 
-
-# The variant NM_000138.5:c.356G>A was extensively studied in Unit 1: Introduction to Clinical Bioinformatics and Genomics
-# The variant interpretation report produced was based on Ensembl VEP annotations and other relevant sources

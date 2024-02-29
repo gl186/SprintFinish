@@ -1,25 +1,29 @@
 """
-Get SPDI format for HGVS genomic data
+Translate a variant identifier, HGVS notation or genomic SPDI notation to all possible variant IDs, HGVS and genomic SPDI
 """
 # Import modules
 import requests
 import json
+import sys
 
 
-def get(hgvs):
-    """Retrieve SPDI format for HGVS genomic data using the NCBI Variation Services API"""
-    base_url = "https://api.ncbi.nlm.nih.gov/variation/v0/hgvs"
-    ext_get_transcripts = f"/{hgvs}/contextuals"
-
+def get_variant_annotation2(genomic_transcript):
+    base_url = "https://rest.ensembl.org"
+    ext = f"/variant_recoder/human/{genomic_transcript}?"
     try:
-        url = base_url + ext_get_transcripts
-        response = requests.get(url, headers={'Content-Type': 'application/json'})
-        response_dict = response.json()
-        print(json.dumps(response_dict, indent=2))
-        return response_dict, 200
+        url = base_url + ext
+        r = requests.get(url, headers={"Content-Type": "application/json"})
+
+        if not r.ok:
+            r.raise_for_status()
+            sys.exit()
+
+        decoded = r.json()
+        print(repr(decoded))
+        return decoded
 
     except requests.RequestException as e:
-        return {"error": f"Error fetching module5_SPDI variant data: {e}"}, 500
+        print(f"Error fetching data: {e}")
 
-# example usage with test hgvs
-# get('NC_000017.10:g.48275363C>A')
+# example usage
+# genomic_transcript = ('rs56116432', 'ENST00000366667:c.803C>T')

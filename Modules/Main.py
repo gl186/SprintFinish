@@ -69,22 +69,12 @@ def call_module4_function(genomic_transcript, select_extraannotaion):
     print("Module 4 VEP Output:", dict_vep_annotation)  # Print module4 output
     return {"VEP_annotations": dict_vep_annotation}
 
+
 #
-# def call_module5_function(input_data):
-#     if input_data is None:
-#         return "Invalid input: JSON data not provided"
-#
-#     # Define hgvs based on module1_output or module2_output
-#     if "module1_output" in input_data:
-#         hgvs = input_data["module1_output"]
-#     elif "module2_output" in input_data:
-#         hgvs = input_data["module2_output"]
-#     else:
-#         return "Invalid input: module1_output or module2_output not provided"
-#
-#     # Call modules 5 functions to get SPDI format and descriptive detail
-#     dict_spdi_format = module5_VR_SPDI_code.get_SPDI(hgvs)
-#     dict_spdi_detail = module5_SPDI.get(hgvs)
-#
-#     print("Module 5 SPDI Output:", dict_spdi_format, dict_spdi_detail)  # Print module5 output
-#     return jsonify({"SPDI_format": dict_spdi_format, "SPDI_detail": dict_spdi_detail})
+def call_module5_function(genomic_transcript):
+    # Call module 5 function to get SPDI annotations for genomic_transcript
+    dict_spdi_annotation = module5_SPDI.get_variant_annotation2(genomic_transcript)
+    print("Module 5 SPDI Output:", dict_spdi_annotation)  # Print module5 output
+    return {"SPDI_annotations": dict_spdi_annotation}
+
+
