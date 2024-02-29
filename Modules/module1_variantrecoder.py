@@ -11,6 +11,15 @@ def ensemblMapper(ensemblTranscript):
     path = "/variant_recoder/human/" + ensemblTranscript
 
     response = requests.get(url + path, headers={"Content-Type": "application/json"})
+    if response.status_code != 200:
+        # Handle non-200 responses without trying to parse JSON
+        return {"Genomic-HGVS": []}
+    try:
+        return {"Genomic-HGVS": response.json()}
+    except requests.exceptions.JSONDecodeError:
+        # Handle cases where response is not in JSON format
+        return {"Genomic-HGVS": []}
+
     print("response", response)
     return {"Genomic-HGVS": response.json()}
 
