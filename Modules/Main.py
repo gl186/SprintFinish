@@ -7,7 +7,7 @@ This module is the central module that will be used to call upon the other modul
 from flask import Flask, jsonify
 from Modules import module1_variantrecoder
 from Modules import module2_variantvalidator
-# from Modules import module3_VV_LOVD_code_only
+from Modules import module3_VV_LOVD_code_only
 # from Modules import module4_VEP_code_only
 # from Modules import module5_SPDI
 # from Modules import module5_VR_SPDI_code
@@ -53,27 +53,17 @@ def call_module1_function(transcript_model):
     return jsonify(result)
 
 
+def call_module3_function(variant_description, transcript_model, genome_build, liftover, checkonly, select_transcripts):
+    # Call module 3 function to get mane variant description
+    dict_mane_variants = module3_VV_LOVD_code_only.get_genomic_transcript(variant_description, transcript_model,
+                                                                          genome_build, liftover, checkonly,
+                                                                          select_transcripts)
+
+    print("Module 3 MANE output:", dict_mane_variants)  # Print module3 output
+    return jsonify({"MANE output": dict_mane_variants})
+
+
 '''
-def call_module3_function(input_data):
-    if input_data is None:
-        return "Invalid input: JSON data not provided"
-
-    # Define variant_description based on module1_output or module2_output
-    if "module1_output" in input_data:
-        variant_description = input_data["module1_output"]
-    elif "module2_output" in input_data:
-        variant_description = input_data["module2_output"]
-    else:
-        return "Invalid input: module1_output or module2_output not provided"
-
-    # Call module 3 function to get mane variant description for GRCh37 and GRCh38
-    dict_mane_variants_grch37 = module3_VV_LOVD_code_only.get_for_GRCh37(variant_description)
-    dict_mane_variants_grch38 = module3_VV_LOVD_code_only.get_for_GRCh38(variant_description)
-
-    print("Module 3 MANE output:", dict_mane_variants_grch37, dict_mane_variants_grch38)  # Print module3 output
-    return jsonify({"MANE_GRCh37": dict_mane_variants_grch37, "MANE_GRCh38": dict_mane_variants_grch38})
-
-
 def call_module4_function(input_data):
     if input_data is None:
         return "Invalid input: JSON data not provided"

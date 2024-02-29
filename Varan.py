@@ -104,6 +104,65 @@ class VariantAnnotationToolClass(Resource):
             return content
 
 
+@VariantAnnotationToolNameSpace.route("/<string:variant_description>/<string:transcript_model>/<string:liftover>/<string:genome_build>/<string:checkonly>/<string:select_transcripts>")
+@api.param("variant_description", "***Genomic HGVSg***\n"
+                                 ">NC_000001.11:g.230710021G>A\n"
+                                 ">NC_000017.10:g.48275363C>A\n"
+                                 "\n Notes\n"
+                                 "pVCF, multiple comma separated ALTs are supported\n"
+                                 "Multiple variants can be submitted, separated by the pipe '|' character\n"
+                                 "Recommended maximum is 10 variants per submission\n")
+
+
+@api.param("transcript_model", "\n***Accepts***\n"
+                               ">\n refseq (return data for RefSeq transcript models)\n"
+                               ">\n ensembl (return data for ensembl transcript models)\n"
+                               ">\n all \n")
+
+@api.param("liftover", "\n***Accepts***\n"
+                               ">\n True - (liftover to all genomic loci)\n"
+                               ">\n primary - (lift to primary assembly only)\n"
+                               ">\n False \n")
+
+@api.param("checkonly", "\n***Accepts***\n"
+                               ">\n True (return ONLY the genomic variant descriptions\n"
+                               ">\n False\n")
+
+@api.param("genome_build", "***Accepts:***\n"
+                           ">   - GRCh37\n"
+                           ">   - GRCh38\n"
+                           ">   - hg19\n"
+                           ">   - hg38")
+
+@api.param("select_transcripts", "\n***Return all possible transcripts***\n"
+                               ">\n None or all (all transcripts at the latest versions)"
+                                "\nraw (all transcripts all version)"
+                                "\nselect (select transcripts)"
+                                "\n mane (MANE select transcripts) "
+                                "\nmane_select (MANE select and MANE Plus Clinical transcripts)\n"
+                               "\n***Single***\n"
+                               ">\n NM_000093.4 \n"
+                               "\n***Multiple***\n"
+                               ">\n NM_000093.4|NM_001278074.1|NM_000093.3 \n")
+
+class GenomicAnnotaterTool(Resource):
+    @api.doc(parser=parser)
+    def get(self, variant_description, transcript_model, genome_build, liftover, checkonly, select_transcripts):
+        args = parser.parse_args()
+        genomic_transcript = Main.call_module3_function(variant_description, transcript_model, genome_build, liftover, checkonly, select_transcripts)
+
+        content = genomic_transcript
+        if args['content-type'] == 'application/json':
+            # example: http://127.0.0.1:5000.....bob?content-type=application/json
+            return json(content, 200, None)
+        # example: http://127.0.0.1:5000.....?content-type=text/xml
+        elif args['content-type'] == 'text/xml':
+            return xml(content, 200, None)
+        else:
+            # Return the api default output
+            return content
+
+
 '''# Define a namespace for both modules 4&5
 ns = api.namespace('extra-annotation-options', description='Get SPDI and/or Get VEP annotation')
 
@@ -120,7 +179,6 @@ class extraannotations(Resource):
         # In a real application, you would process the incoming data here
         return {'message': 'You selected: {}'.format(api.payload['Choices'])}, 200
 '''
-
 
 if __name__ == "__main__":
     application.run(debug=True)
