@@ -55,7 +55,7 @@ def json(data, code, headers):
     return resp
 
 
-@VariantAnnotationToolNameSpace.route("/<string:select_transcripts>/<string:transcript_model>/<string:genome_build>")
+@VariantAnnotationToolNameSpace.route("HGVS/<string:select_transcripts>/<string:transcript_model>/<string:genome_build>")
 @api.param("select_transcripts", "***Return all possible transcripts***\n"
                                  ">select ensembl (with or without version number)\n"
                                  ">select refseq(must have version number)\n"
@@ -104,7 +104,7 @@ class VariantAnnotationToolClass(Resource):
             return content
 
 
-@VariantAnnotationToolNameSpace.route("/<string:variant_description>/<string:transcript_model>/<string:liftover>/<string:genome_build>/<string:checkonly>/<string:select_transcripts>")
+@VariantAnnotationToolNameSpace.route("LOVD/<string:variant_description>/<string:transcript_model>/<string:liftover>/<string:genome_build>/<string:checkonly>/<string:select_transcripts>")
 @api.param("variant_description", "***Genomic HGVSg***\n"
                                  ">NC_000001.11:g.230710021G>A\n"
                                  ">NC_000017.10:g.48275363C>A\n"
@@ -163,22 +163,35 @@ class GenomicAnnotaterTool(Resource):
             return content
 
 
-'''# Define a namespace for both modules 4&5
-ns = api.namespace('extra-annotation-options', description='Get SPDI and/or Get VEP annotation')
-
-# Model definition for the above multiple-choice parameter
-extraannotations = api.model('ChoicesModel', {})
+# Define a namespace rout for both modules 4&5
 
 
-@ns.route("/<string:select_extraannotaion>")
-@api.param("select_extraannotaion", enum=["Get SPDI", "Get VEP annotation"])
-class extraannotations(Resource):
-    @ns.expect(extraannotations)
-    
-    def get(self, genome_build):
-        # In a real application, you would process the incoming data here
-        return {'message': 'You selected: {}'.format(api.payload['Choices'])}, 200
-'''
+@VariantAnnotationToolNameSpace.route("VEP/SPDI<string:genomic_transcript>/<string:select_extraannotaion>")
+@api.param("select_extraannotaion", enum=["SPDI", "VEP"])
+class ExtraAnnotations(Resource):
+    @api.doc(parser=parser)
+    def get(self, genomic_transcript, select_extraannotaion):
+        extra_annotation = None
+        args = parser.parse_args()
+
+        select_extraannotaion = select_extraannotaion.lower()
+        if select_extraannotaion == "vep":
+            extra_annotation = Main.call_module4_function(genomic_transcript, select_extraannotaion)
+            logger.info("VEP annotation form")
+        # if select_extraannotaion == "SPDI":
+        #     extra_annotation = Main.call_module5_function(genomic_transcript)
+        #     logger.info("SPDI annotation form")
+        # Overrides the default response route so that the standard HTML URL can return any specified format
+        if args['content-type'] == 'application/json':
+            # example: http://127.0.0.1:5000.....bob?content-type=application/json
+            return json(extra_annotation, 200, None)
+        # example: http://127.0.0.1:5000.....?content-type=text/xml
+        elif args['content-type'] == 'text/xml':
+            return xml(extra_annotation, 200, None)
+        else:
+            # Return the api default output
+            return extra_annotation
+
 
 if __name__ == "__main__":
     application.run(debug=True)
