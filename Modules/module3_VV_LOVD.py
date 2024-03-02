@@ -24,12 +24,3 @@ def get_genomic_transcript(variant_description, transcript_model, genome_build, 
 
     except requests.RequestException as e:
         print(f"Error fetching LOVD variant data: {e}")
-
-
-# Example usage
-# variant_description = module2_variantvalidator.test_return_hgvs()
-# dict_possible_variants_GRCh37 = get_for_GRCh37(variant_description)
-# dict_possible_variants_GRCh38 = get_for_GRCh38(variant_description)
-#
-# return_value = ({"variants_GRCh37": dict_possible_variants_GRCh37, "variants_GRCh38": dict_possible_variants_GRCh38})
-# print(return_value)

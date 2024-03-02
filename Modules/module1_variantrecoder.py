@@ -15,13 +15,11 @@ def ensemblMapper(ensemblTranscript):
         # Handle non-200 responses without trying to parse JSON
         return {"Genomic-HGVS": []}
     try:
+        print("response", response.json())
         return {"Genomic-HGVS": response.json()}
     except requests.exceptions.JSONDecodeError:
         # Handle cases where response is not in JSON format
         return {"Genomic-HGVS": []}
-
-    print("response", response)
-    return {"Genomic-HGVS": response.json()}
 
 
 ensemblTranscript = "ENST00000366667:c.803C>T"  # Replace with your ensemblTranscript transcript ID

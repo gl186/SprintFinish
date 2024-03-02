@@ -3,7 +3,6 @@ Translate a variant identifier, HGVS notation or genomic SPDI notation to all po
 """
 # Import modules
 import requests
-import json
 import sys
 
 

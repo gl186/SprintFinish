@@ -3,12 +3,11 @@ Simple code that input genomic annotation and retrieve data from SPDI annotater 
 """
 import requests
 import sys
-import json
 
 
-def get_variant_annotation(select_extraannotaion, genomic_transcript):
+def get_variant_annotation(genomic_transcript):
     base_url = "https://rest.ensembl.org"
-    ext = f"/{genomic_transcript}/human/hgvs/{select_extraannotaion}"
+    ext = f"/vep/human/hgvs/{genomic_transcript}"
 
     try:
         # Define the Ensembl VEP REST API endpoints
@@ -18,8 +17,8 @@ def get_variant_annotation(select_extraannotaion, genomic_transcript):
         r = requests.get(url, headers={"Content-Type": "application/json"})
 
         if not r.ok:
-            r.raise_for_status()
-            sys.exit()
+            if r.status_code == 400:
+                return r.json()
 
         decoded = r.json()
         print(repr(decoded))
