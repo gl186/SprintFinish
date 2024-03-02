@@ -7,19 +7,17 @@ This module is the central module that will be used to call upon the other modul
 from flask import Flask, jsonify
 from Modules import module1_variantrecoder
 from Modules import module2_variantvalidator
-from Modules import module3_VV_LOVD_code_only
-from Modules import module4_VEP_code_only
+from Modules import module3_VV_LOVD
+from Modules import module4_VEP
 from Modules import module5_SPDI
 import logging
 
-app = Flask(__name__)
 
 # Determine logger format and create the file
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-logging.basicConfig(filename="E:\\python\\Mainpy.log",
-                    level=logging.DEBUG,
+logging.basicConfig(level=logging.DEBUG,
                     format=LOG_FORMAT)
-logger = logging.getLogger()
+logger = logging.getLogger("Main")
 
 # Determine logger messages and arrange them by the 5 levels of severity
 logger.info("This is an info message")
@@ -28,43 +26,39 @@ logging.warning("This is a warning message")
 logging.error("This is an error message")
 logging.critical("This is a critical message")
 
-print(logger.level)
 
 
 # Routes for module functionality
 def call_module1_function(transcript_model):
     if "ENST" in transcript_model:
         module1_output = module1_variantrecoder.ensemblMapper(transcript_model)
-        result = {
+        return jsonify({
             "module1_output": module1_output,
             "ensembleTranscript": transcript_model
-        }
+        })
     elif "NM_" in transcript_model:
         module2_output = module2_variantvalidator.get_genomic_info_from_transcript(transcript_model)
-        result = {
+        return jsonify({
             "module2_output": module2_output,
             "transcript_id": transcript_model
-        }
+        })
     else:
         return "Invalid input: transcript_id should contain 'ENST' or 'NM_'"
-
-    print("module1_output", result)
-    return jsonify(result)
 
 
 def call_module3_function(variant_description, transcript_model, genome_build, liftover, checkonly, select_transcripts):
     # Call module 3 function to get mane variant description
-    dict_mane_variants = module3_VV_LOVD_code_only.get_genomic_transcript(variant_description, transcript_model,
-                                                                          genome_build, liftover, checkonly,
-                                                                          select_transcripts)
+    dict_mane_variants = module3_VV_LOVD.get_genomic_transcript(variant_description, transcript_model,
+                                                                genome_build, liftover, checkonly,
+                                                                select_transcripts)
 
-    print("Module 3 MANE output:", dict_mane_variants)  # Print module3 output
+    logging.info("Module 3 MANE output:", dict_mane_variants)# Print module3 output
     return jsonify({"MANE output": dict_mane_variants})
 
 
-def call_module4_function(genomic_transcript, select_extraannotaion):
+def call_module4_function(genomic_transcript):
     # Call module 4 function to get VEP annotations for genomic_transcript
-    dict_vep_annotation = module4_VEP_code_only.get_variant_annotation(genomic_transcript, select_extraannotaion)
+    dict_vep_annotation = module4_VEP.get_variant_annotation(genomic_transcript)
 
     print("Module 4 VEP Output:", dict_vep_annotation)  # Print module4 output
     return {"VEP_annotations": dict_vep_annotation}
@@ -76,5 +70,3 @@ def call_module5_function(genomic_transcript):
     dict_spdi_annotation = module5_SPDI.get_variant_annotation2(genomic_transcript)
     print("Module 5 SPDI Output:", dict_spdi_annotation)  # Print module5 output
     return {"SPDI_annotations": dict_spdi_annotation}
-
-
