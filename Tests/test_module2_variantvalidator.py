@@ -1,9 +1,6 @@
 """
 A Unit test for module2_variantvalidator.py
 """
-
-
-import pytest
 import requests
 import requests_mock
 from Modules.module2_variantvalidator import get_genomic_info_from_transcript
