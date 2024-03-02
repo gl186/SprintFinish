@@ -52,7 +52,7 @@ def call_module3_function(variant_description, transcript_model, genome_build, l
                                                                 genome_build, liftover, checkonly,
                                                                 select_transcripts)
 
-    logging.info("Module 3 MANE output:", dict_mane_variants)# Print module3 output
+    logging.info("Module 3 MANE output:", dict_mane_variants)# logging.info module3 output
     return jsonify({"MANE output": dict_mane_variants})
 
 
@@ -60,7 +60,7 @@ def call_module4_function(genomic_transcript):
     # Call module 4 function to get VEP annotations for genomic_transcript
     dict_vep_annotation = module4_VEP.get_variant_annotation(genomic_transcript)
 
-    print("Module 4 VEP Output:", dict_vep_annotation)  # Print module4 output
+    logging.info(f"Module 4 VEP Output: {dict_vep_annotation}")  # logging.info module4 output
     return {"VEP_annotations": dict_vep_annotation}
 
 
@@ -68,5 +68,5 @@ def call_module4_function(genomic_transcript):
 def call_module5_function(genomic_transcript):
     # Call module 5 function to get SPDI annotations for genomic_transcript
     dict_spdi_annotation = module5_SPDI.get_variant_annotation2(genomic_transcript)
-    print("Module 5 SPDI Output:", dict_spdi_annotation)  # Print module5 output
+    logging.info(f"Module 5 SPDI Output: {dict_spdi_annotation}")  # logging.info module5 output
     return {"SPDI_annotations": dict_spdi_annotation}
