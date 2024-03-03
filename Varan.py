@@ -1,20 +1,24 @@
-# -*- coding: UTF-8 -*-
-"""
-This module is the central module that will be used to call upon the other modules and logs its usage.
-"""
-# Import modules that will be called to complete requests from the Main.py API
-from flask import Flask, make_response
-from flask_restx import Api, Resource, reqparse, fields
-from dicttoxml import dicttoxml
 import logging
-
+from flask import Flask, make_response
+from flask_restx import Api, Resource, reqparse
+from dicttoxml import dicttoxml
 from Modules import Main
 
 # Determine logger format and create the file
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-logging.basicConfig(level=logging.DEBUG,
+logging.basicConfig(filename="E:\\python\\Mainpy.log",
+                    level=logging.DEBUG,
                     format=LOG_FORMAT)
 logger = logging.getLogger()
+
+# Determine logger messages and arrange them by the 5 levels of severity
+logger.info("This is an info message")
+logging.debug("This is a debug message")
+logging.warning("This is a warning message")
+logging.error("This is an error message")
+logging.critical("This is a critical message")
+
+print(logger.level)
 
 # Define the application as a Flask app with the name defined by __name__ (i.e. the name of the current module)
 # Most tutorials define application as "app"
@@ -26,9 +30,10 @@ api = Api(app=application)
 # Define a name-space to be read Swagger UI which is built in to Flask-RESTX
 # The first variable is the path of the namespace the second variable describes the space
 
-# implemented the swagger UI and made the shape of API : Linda
-VariantAnnotationToolNameSpace = api.namespace('transcript-mapper',
-                                               description='Return a genomic, transcript and protein description')
+# implemented the swagger UI and made the shape of API
+VariantAnnotationToolNameSpace = api.namespace('Varan',
+                                               description='Transcript mapper that returns a genomic, transcript '
+                                                           'and protein description')
 
 # Create a RequestParser object to identify specific content-type requests in HTTP URLs
 # The request parser allows us to specify arguments passed via a URL, in this case, ....?content-type=application/json
@@ -103,8 +108,8 @@ class VariantAnnotationToolClass(Resource):
             # Return the api default output
             return content
 
-
-'''# Define a namespace for both modules 4&5
+'''
+Define a namespace for both modules 4&5
 ns = api.namespace('extra-annotation-options', description='Get SPDI and/or Get VEP annotation')
 
 # Model definition for the above multiple-choice parameter
