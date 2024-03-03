@@ -1,110 +1,104 @@
-# SprintFinish
-Sprint 2 and final assessment project for Group 1 (Module 3 PGCert Clinical Bioinformatics Intro to Programming)
-SprintFinish is a Flask-based RESTful API for retrieving genomic data, including ensemble transcripts, RefSeq transcripts, LOVD variant annotations, and VEP variant data.
+## SprintFinish
 
-This README provides an overview of the SprintFinish RESTful API, installation instructions, usage guidelines, testing procedures, contribution guidelines, and license information
+SprintFinish is a Flask-based RESTful API that performs genomic data retrieval and analysis, including Ensembl or RefSeq transcripts, LOVD variant annotations, and VEP variant data.
 
-This python API integration will accept GEL variant descriptions (ie. c. 4375C>T) and provide valid and accurate genome, transcript and protein variant descriptions.
-This product will gather the information from Variant Validator REST aPI and return the data as a Python dictionary.
+Developed by Group 1 in Module 3 for the PGCert Clinical Bioinformatics Introduction to Programming.
 
-# About rest_variantValidator
+## Overview
 
-This project utilises rest_variantValidator, a RESTful API web interface for VariantValidator
+This README provides an overview of the SprintFinish RESTful API, installation instructions, usage guidelines, testing procedures, contribution guidelines, and license information.
 
-# About VariantValidator
+This Python API integration accepts GEL variant descriptions (e.g., c.4375C>T) and provides valid and accurate genome, transcript, and protein variant descriptions.
 
-VariantValidator is a user-friendly software tool designed to validate the syntax and 
-parameters of DNA variant descriptions according to the HGVS Sequence Variant 
-Nomenclature. 
+## Installation
 
-VariantValidator ensures that users are guided through the intricacies of the HGVS 
-nomenclature, e.g. if the user makes a mistake, VariantValidator automatically corrects 
-the mistake if it can, or provides helpful guidance if it cannot. In addition, 
-VariantValidator accurately interconverts between transcript variant descriptions and 
-genomic variant descriptions in HGVS and Variant Call Format (VCF)
+Ensure Anaconda or Miniconda is installed on your machine along with a Linux or Mac OS X operating system. Create the conda environment using the provided `environment.yml` file:
+```bash
+conda env create -f environment.yml
+```
 
-VariantValidator interfaces with the hgvs package to parse, format, and manipulate 
-biological sequence variants.  See https://github.com/biocommons/hgvs/ for details of the
-hgvs package
+Activate the environment:
+```
+conda activate SprintFinish
+```
+Install the requirements:
 
-VariantValidator is a highly functional platform enabling high-throughput and embeddable
-utilisation of functionality of https://variantvalidator.org/
+```
+pip install -r requirements.txt
+```
+Navigate to the directory containing Varan.py and run:
+```
+flask --app Varan --debug run
+```
 
-# Accepted Inputs
+## For detailed installation instructions, see:
+SprintFinish_Installation.md.
 
-Input: Variant description as an Ensembl transcript description with or without version number
+## About Rest Variant Validator
+SprintFinish utilizes Rest Variant Validator, a RESTful API web interface for VariantValidator.
 
-#The accepted format for variants include:
+## About VariantValidator
+VariantValidator is a user-friendly tool designed to validate the syntax and parameters of DNA variant descriptions according to the HGVS Sequence Variant Nomenclature. It interconverts between transcript variant descriptions and genomic variant descriptions in HGVS and Variant Call Format (VCF).
+
+VariantValidator interfaces with the hgvs package to parse, format, and manipulate biological sequence variants. Visit the VariantValidator GitHub repository for details.
+
+## Accepted Inputs
+SprintFinish accepts variant descriptions in various formats, including Ensembl transcript descriptions with or without version numbers. Examples include:
 
 NM_000088.3:c.589G>T
 NC_000017.10:g.48275363C>A
 NG_007400.1:g.8638G>T
 LRG_1:g.8638G>T
 LRG_1t1:c.589G>T
-17-50198002-C-A  # Note this variant is in the context of GRCh38
-chr17:50198002C>A  # Note this variant is in the context of GRCh38
-
-The output received by the client is: Genomic, transcript and protein descriptions with genome annotations.
-
-## Pre-requisites
-
-SprintFinish will work on Mac OS X or Linux operating systems.
-
-Required software:
-* MySQL
-* Python 2.7
-* SQLite version 3.8.0 or above
-
-For installation instructions please see [SprintFinish_Installation.md]()
+17-50198002-C-A
+chr17:50198002C>A
+Usage
+Ensure Flask is installed and your environment is running correctly. Once set up, run the Flask application to host the API locally.
 
 ## Endpoints
+Ensemble Transcript
 
-Below are the available endpoints:
+/ensemble-transcript/<ensemble_transcript>
+Returns a genomic HGVS transcript.
+RefSeq Transcript
 
-- **Ensemble Transcript**
-  - `/ensemble-transcript/<ensemble_transcript>`
-    - Returns a genomic HGVS transcript.
+/RefSeq Release Version 222/variantvalidator/<genome_build>/<variant_description>/<select_transcripts>
+Returns genomic HGVS transcript and genome coordinate.
+LOVD
 
-- **RefSeqTranscript - Georgia and Christoph**
-  - `/RefSeq Release Version 222/variantvalidator/<genome_build>/<variant_description>/<select_transcripts>`
-    - Returns a genomic HGVS transcript and genome coordinate.
+/lovd/<genome_build>/<variant_description>/<select_transcripts>/<checkonly>
+Returns variant data from the Leiden Open Variation Database (LOVD) using the VariantValidator API.
+VEP
 
-- **LOVD**
-  - `/lovd/<genome_build>/<variant_description>/<select_transcripts>/<checkonly>`
-    - Returns variant data from the Leiden Open Variation Database (LOVD) using the VariantValidator API.
-
-- **VEP**
-  - `/VEP/<genome_build>/<variant_description>/<select_transcripts>`
-    - Returns VEP variant data from the Ensembl REST API.
+/VEP/<genome_build>/<variant_description>/<select_transcripts>
+Returns VEP variant data from the Ensembl REST API.
+Response Formats
+SprintFinish supports JSON and XML response formats. Specify the desired format using the content-type parameter in your request.
 
 ## Testing
-
-Run the provided test scripts to validate the functionality of the API endpoints.
+Run the provided pytest test scripts to validate the functionality of the API endpoints.
 
 ## Logging
-
-Errors and exceptions are logged to `rest_api.log`.
+Errors and exceptions are logged to Mainpy.log.
 
 ## Contributing
-
-1. Fork the repository.
-2. Create a new branch.
-3. Make your changes and commit them.
-4. Push to your fork and submit a pull request.
-
-## Operation and configuration
-
-Please see [SprintFinish_UserGuide.md]()
+Fork the repository.
+Create a new branch.
+Make your changes and commit them.
+Push to your fork and submit a pull request.
+Operation and Configuration
+Refer to SprintFinish_UserGuide.md for detailed operational and configuration information.
 
 ## License
+This project is licensed under the LICENSE.
 
-Please see [LICENSE]()
-
-## Contributions in alphabetical order by team members:
-
+## Contributors
 Christoph
 Georgia
 Linda
 Lisa
 Nurhayu
 Sonja
+
+## Contact Information
+For inquiries, contact christoph.johnson@postgrad.manchester.ac.uk
