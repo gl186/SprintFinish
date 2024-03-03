@@ -7,6 +7,10 @@ This module is the central module that will be used to call upon the other modul
 from flask import Flask, jsonify
 from Modules import module1_variantrecoder
 from Modules import module2_variantvalidator
+""" 
+Removed module call functionality using comments but the code is retained in the event
+the code is reinstated
+"""
 # from Modules import module3_VV_LOVD_code_only
 # from Modules import module4_VEP_code_only
 # from Modules import module5_SPDI
@@ -52,7 +56,11 @@ def call_module1_function(transcript_model):
     print("module1_output", result)
     return jsonify(result)
 
-
+"""
+Removed module call functionality using comments but the code is retained in the event
+the code is reinstated
+"""
+"""
 def call_module3_function(input_data):
     if input_data is None:
         return "Invalid input: JSON data not provided"
@@ -110,4 +118,4 @@ def call_module5_function(input_data):
 
     print("Module 5 SPDI Output:", dict_spdi_format, dict_spdi_detail)  # Print module5 output
     return jsonify({"SPDI_format": dict_spdi_format, "SPDI_detail": dict_spdi_detail})
-
+"""
