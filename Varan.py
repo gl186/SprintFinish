@@ -32,7 +32,6 @@ api = Api(app=application)
 
 # Define a name-space to be read Swagger UI which is built in to Flask-RESTX
 # The first variable is the path of the namespace the second variable describes the space
-
 # implemented the swagger UI and made the shape of API
 VariantAnnotationToolNameSpace = api.namespace('Varan',
                                                description='Transcript mapper that returns a genomic, transcript '
