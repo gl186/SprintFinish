@@ -4,6 +4,7 @@ This module is the central module that will be used to call upon the other modul
 """
 
 # Import modules that will be called to complete requests from the Main.py API
+import logging
 from flask import Flask, jsonify
 from Modules import module1_variantrecoder
 from Modules import module2_variantvalidator
@@ -15,7 +16,7 @@ the code is reinstated
 # from Modules import module4_VEP_code_only
 # from Modules import module5_SPDI
 # from Modules import module5_VR_SPDI_code
-import logging
+
 
 app = Flask(__name__)
 

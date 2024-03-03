@@ -1,3 +1,6 @@
+"""
+This test file is run to test for various Varan.py use cases and scenarios
+"""
 import pytest
 from unittest.mock import patch
 from flask import Flask
@@ -25,9 +28,12 @@ def test_get_with_refseq(client):
         mock_get_genomic_info_from_transcript.assert_called_once_with('NM_12345.4')
 
 def test_get_with_invalid_content_type(client):
-    response = client.get('/Varan/ensembl/ENST12345/GRCh37')
-    assert response.status_code == 200  # Default behavior is to return content as is
-    assert response.content_type == 'application/json'
+    response = client.get('/Varan/invalid_route')
+    assert response.status_code == 404
+
+def test_get_with_missing_parameters(client):
+    response = client.get('/Varan/ensembl/GRCh37')
+    assert response.status_code == 400
 
 def test_get_with_json_content_type(client):
     response = client.get('/Varan/ensembl/ENST12345/GRCh37', headers={'content-type': 'application/json'})

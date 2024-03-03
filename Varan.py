@@ -1,3 +1,6 @@
+"""
+This Varan.py app will be used as the main user interface to interact and make calls to the Main.py module.
+"""
 import logging
 from flask import Flask, make_response
 from flask_restx import Api, Resource, reqparse
